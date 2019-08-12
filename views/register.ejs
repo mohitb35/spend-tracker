@@ -1,0 +1,30 @@
+<% include partials/header.ejs %>
+
+	<section class="page-content">
+		<div class="offset"></div>
+		<div class="form-container">
+			<h3>REGISTER</h3>
+			<form action="">
+				<div class="form-field">
+					<label for="name">Name</label>
+					<input type="text" name="name" id="name" placeholder="Enter your name">
+				</div>
+				<div class="form-field">
+					<label for="email">Email</label>
+					<input type="email" name="email" id="email" placeholder="Enter your email ID">
+				</div>
+				<div class="form-field">
+					<label for="password">Password</label>
+					<input type="password" name="password" id="password" placeholder="Enter your password">
+				</div>
+				<button type="submit" class="button form-button">Register</button>
+			</form>
+			<div class="reg-info">
+				<p>Already have an account?</p>
+				<a href="/" class="button"><span>Login</span></a>
+			</div>
+		</div>
+	</section>
+
+
+<% include partials/footer.ejs %>
