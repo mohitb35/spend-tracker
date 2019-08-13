@@ -1,0 +1,149 @@
+.grid-container {
+	display: grid;
+	width: 90%;
+	max-width: 1200px;
+	grid-template-columns: [first] 1fr [second] 1fr [end];
+	grid-template-rows: [first] 1fr [second] 1fr [end];
+	grid-template-areas: 
+		"left-col right-col-top"
+		"left-col right-col-bottom";
+	grid-column-gap: 3rem;
+	grid-row-gap: 1rem;
+	height: 80vh;
+	margin: 2rem auto;
+	margin-bottom: 0;
+}
+
+.spend-item-list {
+	grid-area: left-col;
+	background-color: #f7f7f7;
+	overflow: scroll;
+}
+
+.add-item-container {
+	background: white;
+	grid-area: right-col-top;
+}
+
+.stats-container {
+	background: red;
+	grid-area: right-col-bottom;
+}
+
+.grid-container section {
+	-webkit-box-shadow: 4px 10px 20px -5px rgba(11,56,42,0.75);
+	-moz-box-shadow: 4px 10px 20px -5px rgba(11,56,42,0.75);
+	box-shadow: 4px 10px 20px -5px rgba(11,56,42,0.75);
+	border-radius: 0.4rem;
+}
+
+.spend-item {
+	width: 97%;
+	height: 7rem;
+	background: #a5f3d4	;
+	border-radius: 0.4rem;
+	margin: 1.2% 1.2%;
+	display: grid;
+	grid-template-columns: [first] 1fr [second] 7fr [third] 1fr [end];
+	grid-template-rows: [first] 1fr [second] 1fr [third] 1fr [fourth] 1fr [end];
+	grid-template-areas: 
+		". breadcrumbs edit-action"
+		"date item-details edit-action"
+		"date item-details delete-action"
+		". item-details delete-action";
+	-webkit-box-shadow: 2px 5px 10px -4px rgba(11,56,42,0.75);
+	-moz-box-shadow: 2px 5px 10px -4px rgba(11,56,42,0.75);
+	box-shadow: 2px 5px 10px -4px rgba(11,56,42,0.75);
+}
+
+
+.date-box {
+	grid-area: date;
+	background: transparent;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.date {
+	height: 2rem;
+	width: 2rem;
+	border-radius: 1rem;
+	background: #000000;
+	color: #f7f7f7;
+	text-align: center;
+	line-height: 2rem;
+}
+
+.category-box {
+	grid-area: breadcrumbs;
+	background: transparent;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.category, .sub-category {
+	font-size: 0.75rem;
+	border: 1px solid transparent;
+	border-radius: 0.4rem;
+	padding: 0.1rem 0.3rem;
+	margin: 0.1rem 0.5rem;
+}
+
+.category {
+	background-color: orange;
+}
+
+.sub-category {
+	background-color: lightgreen;
+}
+
+.separator {
+	height: 1rem;
+}
+
+.separator img {
+	height: 100%;
+	width: auto;
+	fill: green;
+}
+
+.item-box {
+	grid-area: item-details;
+	background: transparent;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	margin: 0.3rem 0.1rem;
+}
+
+.edit-box {
+	grid-area: edit-action;
+	background: transparent;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.delete-box {
+	grid-area: delete-action;
+	background: transparent;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.delete-box a, .edit-box a {
+	height: 60%;
+	width: 60%;
+	text-align: center;
+}
+
+.delete-box a img, .edit-box a img {
+	height: 100%;
+	width: auto;
+}
+
+
+
