@@ -29,6 +29,7 @@ nav {
 	height: 100%;
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
 }
 
 footer {
@@ -48,4 +49,63 @@ footer {
 .branding {
 	font-size: 2rem;
 	color: #f7f7f7;
+}
+
+.nav-elements-right {
+	display: flex;
+	align-items: center;
+}
+
+.profile-image {
+	height: 60px;
+	width: 60px;
+	border-radius: 50%;
+	position: relative;
+	overflow: hidden;
+	margin-left: 1.5rem;
+}
+
+.profile-image img {
+	height: 100%; 
+	width: auto;
+	margin: 0 auto;
+	margin-left: -25%;
+}
+
+.date-selector {
+	margin: 1.5rem 2rem;
+}
+
+
+/* Attribution - Daniel David https://codepen.io/danield770/pen/bgJOyV?editors=1100 */
+select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	width: 8.2rem;
+	height: 2rem;
+	padding: 0.2rem 1.3rem 0.2rem 1rem;
+	background: url(/media/drop-down-arrow.svg) 92% / 15% no-repeat #eee;
+	border: none;
+}
+
+/* CAUTION: IE hackery ahead */
+select::-ms-expand { 
+    display: none; /* remove default arrow on ie10 and ie11 */
+}
+
+/* target Internet Explorer 9 to undo the custom arrow */
+@media screen and (min-width:0\0) {
+    select {
+        background:none\9;
+        padding: 5px\9;
+    } 
+}
+
+select:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #000;
+}
+option:not(:checked) {
+  color: black; /* prevent <option>s from becoming transparent as well */
 }
