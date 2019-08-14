@@ -4,8 +4,8 @@
   "description": "A simple spend tracking app. Add spends, categorize them, see monthly spends. CRUD functionality.",
   "main": "app.js",
   "scripts": {
-	"test": "echo \"Error: no test specified\" && exit 1",
-	"start": ""
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": ""
   },
   "repository": {
     "type": "git",

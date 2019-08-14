@@ -9,7 +9,7 @@ html, body {
 #page-container {
 	min-height: 100vh;
 	position: relative;
-
+	overflow: scroll;
 }
 
 nav {
@@ -82,11 +82,12 @@ select {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
-	width: 8.2rem;
+	width: 6rem;
 	height: 2rem;
 	padding: 0.2rem 1.3rem 0.2rem 1rem;
-	background: url(/media/drop-down-arrow.svg) 92% / 15% no-repeat #eee;
+	background: url(/media/drop-down-arrow.svg) 96% / 12% no-repeat #eee;
 	border: none;
+	box-sizing: content-box;
 }
 
 /* CAUTION: IE hackery ahead */
@@ -108,4 +109,8 @@ select:-moz-focusring {
 }
 option:not(:checked) {
   color: black; /* prevent <option>s from becoming transparent as well */
+}
+
+h3 {
+	text-transform: uppercase;
 }

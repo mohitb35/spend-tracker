@@ -116,12 +116,176 @@
 
 					
 					</div>
+					<div class="spend-item">
+						<div class="date-box">
+							<div class="date">31</div>
+						</div>
+						<div class="category-box">
+							<div class="category">Commute</div>
+							<div class="separator">
+								<img src="/media/separator.svg" alt="separator">
+							</div>
+							<div class="sub-category">Cab</div>
+						</div>
+						<div class="item-box">
+							<div class="item-name">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi, quam!</div>
+							<div class="item-amount">1000.00</div>
+						</div>
+						<div class="edit-box">
+							<a href="">
+								<img src="/media/edit-icon.svg" alt="">
+							</a>
+						</div>
+						<div class="delete-box">
+							<a href="">
+								<img src="/media/delete-icon.svg" alt="">
+							</a>
+						</div>
+
+					
+					</div>
+					<div class="spend-item">
+						<div class="date-box">
+							<div class="date">31</div>
+						</div>
+						<div class="category-box">
+							<div class="category">Commute</div>
+							<div class="separator">
+								<img src="/media/separator.svg" alt="separator">
+							</div>
+							<div class="sub-category">Cab</div>
+						</div>
+						<div class="item-box">
+							<div class="item-name">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi, quam!</div>
+							<div class="item-amount">1000.00</div>
+						</div>
+						<div class="edit-box">
+							<a href="">
+								<img src="/media/edit-icon.svg" alt="">
+							</a>
+						</div>
+						<div class="delete-box">
+							<a href="">
+								<img src="/media/delete-icon.svg" alt="">
+							</a>
+						</div>
+
+					
+					</div>
+					<div class="spend-item">
+						<div class="date-box">
+							<div class="date">31</div>
+						</div>
+						<div class="category-box">
+							<div class="category">Commute</div>
+							<div class="separator">
+								<img src="/media/separator.svg" alt="separator">
+							</div>
+							<div class="sub-category">Cab</div>
+						</div>
+						<div class="item-box">
+							<div class="item-name">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi, quam!</div>
+							<div class="item-amount">1000.00</div>
+						</div>
+						<div class="edit-box">
+							<a href="">
+								<img src="/media/edit-icon.svg" alt="">
+							</a>
+						</div>
+						<div class="delete-box">
+							<a href="">
+								<img src="/media/delete-icon.svg" alt="">
+							</a>
+						</div>
+
+					
+					</div>
+					<div class="spend-item">
+						<div class="date-box">
+							<div class="date">31</div>
+						</div>
+						<div class="category-box">
+							<div class="category">Commute</div>
+							<div class="separator">
+								<img src="/media/separator.svg" alt="separator">
+							</div>
+							<div class="sub-category">Cab</div>
+						</div>
+						<div class="item-box">
+							<div class="item-name">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi, quam!</div>
+							<div class="item-amount">1000.00</div>
+						</div>
+						<div class="edit-box">
+							<a href="">
+								<img src="/media/edit-icon.svg" alt="">
+							</a>
+						</div>
+						<div class="delete-box">
+							<a href="">
+								<img src="/media/delete-icon.svg" alt="">
+							</a>
+						</div>
+
+					
+					</div>
 				</section>
 				<section class="add-item-container">
-					<h1>Add item from here</h1>
+					<div class="form-header">
+						<h3>Add Spend</h3>
+						<button form="add-spend" type="submit" class="button small">Save</button>
+					</div>
+					<form action="#" method="GET" id="add-spend">
+						<div class="form-field inline">
+							<label for="item-name">Name</label>
+							<input type="text" name="item-name" id="item-name" placeholder="What did you buy?">
+						</div>
+						<div class="form-field inline">
+							<label for="date">Date</label>
+							<input type="date" name="date" id="date" placeholder="Select a date">
+						</div>
+						<div class="form-field inline">
+							<label for="amount">Amount</label>
+							<input type="number" name="amount" id="amount" placeholder="Enter amount">
+						</div>
+						<div class="form-field inline">
+							<label for="category">Category</label>
+							<div class="selector">
+								<select name="category" id="category">
+									<option value="">Category 1</option>
+									<option value="">Category 2</option>
+									<option value="">Category 3</option>
+									<option value="">Category 4</option>
+									<option value="">Category 5</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-field inline">
+							<label for="sub-category">Sub-Category</label>
+							<div class="selector">
+								<select name="sub-category" id="sub-category">
+									<option value="">Sub category 1</option>
+									<option value="">Sub category 2</option>
+									<option value="">Sub category 3</option>
+									<option value="">Sub category 4</option>
+									<option value="">Sub category 5</option>
+								</select>
+							</div>
+						</div>
+					</form>
 				</section>
 				<section class="stats-container">
-					<h1>Stats Go Here</h1>
+					<div class="stats-selector">
+						<select name="" id="">
+							<option value="">Category 1</option>
+							<option value="">Category 2</option>
+							<option value="">Category 3</option>
+							<option value="">Category 4</option>
+							<option value="">Category 5</option>
+						</select>
+					</div>
+					<div class="chart-container" width="180" height="180">
+						<canvas id="piechart"></canvas>
+					</div>
 				</section>
 			</div>
 		</section>
