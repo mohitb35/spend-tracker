@@ -94,4 +94,26 @@ a.button {
 	justify-content: center;
 }
 
+.error label {
+	color: red;
+}
+
+.error input {
+	border: 1px solid rgba(255,0,0,0.5);
+}
+
+.error-message {
+	display: block;
+	font-size: 0.8rem;
+	height: 1rem;
+	padding: 0.3rem 0.3rem;
+	background: rgb(18,97,72);
+	opacity: 0.9;
+	color: #f7f7f7;
+}
+
+.error-message.hidden {
+	display: none;
+	height: 0;
+}
 

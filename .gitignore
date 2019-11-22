@@ -1,5 +1,8 @@
 #Local Files
 .DS_Store
 
+#config files
+*config*
+
 #Node Modules
 node_modules/

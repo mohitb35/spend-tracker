@@ -5,18 +5,21 @@
 		<div class="form-container">
 			<%# Change Needed - Temporarily taking the user to dashboard without authentication %>
 			<h3>Register</h3>
-			<form action="/dashboard" method="GET">
+			<form id="reg-form" action="/register" method="post" novalidate>
 				<div class="form-field">
 					<label for="name">Name</label>
-					<input type="text" name="name" id="name" placeholder="Enter your name">
+					<input type="text" name="name" id="name" placeholder="Enter your name" required>
+					<span class="error-message hidden"></span>
 				</div>
 				<div class="form-field">
 					<label for="email">Email</label>
-					<input type="email" name="email" id="email" placeholder="Enter your email ID">
+					<input type="email" name="email" id="email" placeholder="Enter your email ID" required>
+					<span class="error-message hidden"></span>
 				</div>
 				<div class="form-field">
 					<label for="password">Password</label>
-					<input type="password" name="password" id="password" placeholder="Enter your password">
+					<input type="password" name="password" id="password" placeholder="Enter your password" required>
+					<span class="error-message hidden"></span>
 				</div>
 				<button type="submit" class="button form-button">Register</button>
 			</form>
