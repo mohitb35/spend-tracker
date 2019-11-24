@@ -235,7 +235,7 @@
 						<h3>Add Spend</h3>
 						<button form="add-spend" type="submit" class="button small">Save</button>
 					</div>
-					<form action="#" method="GET" id="add-spend">
+					<form id="add-spend-form" action="#" method="GET" id="add-spend">
 						<div class="form-field inline">
 							<label for="item-name">Name</label>
 							<input type="text" name="item-name" id="item-name" placeholder="What did you buy?">
@@ -252,11 +252,10 @@
 							<label for="category">Category</label>
 							<div class="selector">
 								<select name="category" id="category">
-									<option value="">Category 1</option>
-									<option value="">Category 2</option>
-									<option value="">Category 3</option>
-									<option value="">Category 4</option>
-									<option value="">Category 5</option>
+									<option value = "" selected disabled hidden> --- Select --- </option>
+									<% categories.forEach(category => { %>
+										<option value="<%= category.id %>"><%= category.name %></option>
+									<% }); %>
 								</select>
 							</div>
 						</div>
@@ -264,11 +263,8 @@
 							<label for="sub-category">Sub-Category</label>
 							<div class="selector">
 								<select name="sub-category" id="sub-category">
-									<option value="">Sub category 1</option>
-									<option value="">Sub category 2</option>
-									<option value="">Sub category 3</option>
-									<option value="">Sub category 4</option>
-									<option value="">Sub category 5</option>
+									<option value = "" selected disabled hidden> --- Select --- </option>
+									<option value = "1">Subcategory 1</option>
 								</select>
 							</div>
 						</div>
@@ -277,11 +273,9 @@
 				<section class="stats-container">
 					<div class="stats-selector">
 						<select name="" id="">
-							<option value="">Category 1</option>
-							<option value="">Category 2</option>
-							<option value="">Category 3</option>
-							<option value="">Category 4</option>
-							<option value="">Category 5</option>
+							<% categories.forEach(category => { %>
+								<option value="<%= category.id %>"><%= category.name %></option>
+							<% }); %>
 						</select>
 					</div>
 					<div class="chart-container" width="180" height="180">

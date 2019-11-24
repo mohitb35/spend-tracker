@@ -1,9 +1,14 @@
+const serverUrl = 'http://localhost:3000';
+
 let regForm = document.getElementById("reg-form");
 let loginForm = document.getElementById("login-form")
 let name = document.getElementById("name");
 let email = document.getElementById("email");
 let password = document.getElementById("password");
 let loginPassword = document.getElementById("login-password");
+let addSpendForm = document.getElementById("add-spend-form");
+let categoryList = document.getElementById("category");
+let subCategoryList = document.getElementById("sub-category");
 
 function validateRegister(event) {
 	// Check name
@@ -152,4 +157,38 @@ if(loginForm !== null) {
 	loginPassword.addEventListener("keyup", validatePassword);
 }
 
+// Add events for Add Spend Form
+if(addSpendForm !== null) {
+	categoryList.addEventListener("change", updateSubcategoryList);
+}
+
+function updateSubcategoryList(event) {
+	let categoryId = event.target.value;
+	fetch(serverUrl + "/spend/categories/" + categoryId)
+	.then(response => response.json())
+	.then(subcategories => {
+			console.log("Subcategories", subcategories);
+
+			// Remove previous subcategories
+			let currentOptionCount = subCategoryList.options.length;
+
+			for(let i = currentOptionCount; i>1; i--) {
+				subCategoryList.removeChild(subCategoryList.options[i-1]);
+			}
+
+			if(Array.isArray(subcategories)) {
+				subCategoryList.options[0].innerText = "--- Select ---";
+				// Add fetched subcategories
+				subcategories.forEach(subcategory => {
+					let opt = document.createElement('option');
+					opt.innerText = subcategory.name;
+					opt.value = subcategory.id;
+					subCategoryList.appendChild(opt);
+				});
+			} else {
+				// If there are no subcategories found, show the error text
+				subCategoryList.options[0].innerText = subcategories;
+			}
+		});
+	}
 

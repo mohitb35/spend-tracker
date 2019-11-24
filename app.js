@@ -3,6 +3,7 @@ const config = require('./config');
 const express = require('express');
 const bodyParser = require('body-parser');
 const sessions = require('client-sessions');
+const fetch = require('node-fetch');
 
 const indexRoutes = require('./routes/index');
 
@@ -58,7 +59,14 @@ app.use('/', indexRoutes);
 //Dashboard Page
 app.get("/dashboard", loginRequired, (req, res) => {
 	let token = req.session.token;
-	res.render("dashboard", {token: token});
+	let categories;
+	// get list of categories
+	fetch(config.serverUrl + "/spend/categories")
+		.then(response => response.json())
+		.then(response => {
+			categories = response;
+			res.render("dashboard", {token: token, categories: categories});
+		});
 });
 
 //404 Route
