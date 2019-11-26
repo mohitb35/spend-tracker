@@ -7,12 +7,15 @@ let email = document.getElementById("email");
 let password = document.getElementById("password");
 let loginPassword = document.getElementById("login-password");
 let addSpendForm = document.getElementById("add-spend-form");
+let itemName = document.getElementById("item-name");
+let spendDate = document.getElementById("date");
+let amount = document.getElementById("amount");
 let categoryList = document.getElementById("category");
 let subCategoryList = document.getElementById("sub-category");
 
 function validateRegister(event) {
 	// Check name
-	let nameError = isNameInvalid(name.value);
+	let nameError = isTextInvalid(name.value, "name");
 	let nameFormElement = name.parentNode;
 	let nameErrorMessage = nameFormElement.lastElementChild;
 	handleError (event, nameError, nameFormElement, nameErrorMessage);
@@ -55,14 +58,19 @@ function validateLogin(event) {
 function validateName(event) {
 	let formElement = event.target.parentNode;
 	let errorMessage = formElement.lastElementChild;
-	let error = isNameInvalid(event.target.value);
+	let error = isNameInvalid(event.target.value, "name");
 
 	handleError(event, error, formElement, errorMessage);
 };
 
-function isNameInvalid(nameText) {
+function isTextInvalid(nameText, type) {
 	if (nameText === "") {
-		return "Please enter your name";
+		if (type == "name"){
+			return "Please enter your name";
+		}
+		 if (type == "item-name") {
+			return "Please enter the item name";
+		 }
 	}
 
 	return false;
@@ -137,6 +145,117 @@ function handleError(event, error, formElement, errorMessage) {
 	}
 }
 
+function validateAddSpend(event) {
+	// Check item name
+	let itemNameError = isTextInvalid(itemName.value, "item-name");
+	let itemNameFormElement = itemName.parentNode;
+	let itemNameErrorMessage = itemNameFormElement.lastElementChild;
+	handleError (event, itemNameError, itemNameFormElement, itemNameErrorMessage);
+
+	// Check date
+	let spendDateError = isDateInvalid(spendDate.value);
+	let spendDateFormElement = spendDate.parentNode;
+	let spendDateErrorMessage = spendDateFormElement.lastElementChild;
+	handleError (event, spendDateError, spendDateFormElement, spendDateErrorMessage);
+
+	// Check amount
+	let amountError = isAmountInvalid(amount.value);
+	let amountFormElement = amount.parentNode;
+	let amountErrorMessage = amountFormElement.lastElementChild;
+	handleError (event, amountError, amountFormElement, amountErrorMessage);
+
+	// Check category
+	let categoryError = isValueSelected(categoryList.value, "category");
+	let categoryFormElement = categoryList.parentNode;
+	let categoryErrorMessage = categoryFormElement.lastElementChild;
+
+	handleError(event, categoryError, categoryFormElement, categoryErrorMessage);
+
+	// Check sub category
+	let subCategoryError = isValueSelected(subCategoryList.value, "sub-category");
+	let subCategoryFormElement = subCategoryList.parentNode;
+	let subCategoryErrorMessage = subCategoryFormElement.lastElementChild;
+
+	handleError(event, subCategoryError, subCategoryFormElement, subCategoryErrorMessage);
+
+	if(itemNameError || spendDateError || amountError || categoryError || subCategoryError){
+		event.preventDefault();
+	} 
+}
+
+function validateItemName(event) {
+	let formElement = event.target.parentNode;
+	let errorMessage = formElement.lastElementChild;
+	let error = isTextInvalid(event.target.value, "item-name");
+
+	handleError(event, error, formElement, errorMessage);
+}
+
+function validateSpendDate(event) {
+	let formElement = event.target.parentNode;
+	let errorMessage = formElement.lastElementChild;
+	let error = isDateInvalid(event.target.value);
+
+	handleError(event, error, formElement, errorMessage);
+}
+
+function isDateInvalid(spendDate) {
+	if (spendDate === "") {
+		return "Please enter the spend date";
+	}
+	return false;
+}
+
+function validateAmount(event) {
+	let formElement = event.target.parentNode;
+	let errorMessage = formElement.lastElementChild;
+	let error = isAmountInvalid(event.target.value);
+
+	handleError(event, error, formElement, errorMessage);
+}
+
+function isAmountInvalid(amountText) {
+	if(amountText === ""){
+		return "Please enter an amount";
+	}
+
+	if(amountText < 0 || isNaN(amountText)) {
+		return "Please enter a valid amount";
+	}
+
+	return false;
+}
+
+function validateCategory(event) {
+	let formElement = event.target.parentNode;
+	let errorMessage = formElement.lastElementChild;
+	let error = isValueSelected(event.target.value, "category");
+
+	handleError(event, error, formElement, errorMessage);
+}
+
+function validateSubCategory(event) {
+	let formElement = event.target.parentNode;
+	let errorMessage = formElement.lastElementChild;
+	let error = isValueSelected(event.target.value, "sub-category");
+
+	handleError(event, error, formElement, errorMessage);
+}
+
+function isValueSelected(value, type) {
+	if(value === "") {
+		if (type === "category") {
+			return "Please select category";
+		}
+		
+		if (type === "sub-category") {
+			return "Please select sub category";
+		}
+
+		return false;
+	}
+}
+
 // Add events for register form page
 if(regForm !== null) {
 	regForm.addEventListener("submit", validateRegister);
@@ -159,15 +278,23 @@ if(loginForm !== null) {
 
 // Add events for Add Spend Form
 if(addSpendForm !== null) {
+	addSpendForm.addEventListener("submit", validateAddSpend);
+	itemName.addEventListener("blur", validateItemName);
+	itemName.addEventListener("keyup", validateItemName);
+	spendDate.addEventListener("blur", validateSpendDate);
+	amount.addEventListener("blur", validateAmount);
+	amount.addEventListener("keyup", validateAmount);
 	categoryList.addEventListener("change", updateSubcategoryList);
+	categoryList.addEventListener("blur", validateCategory);
+	subCategoryList.addEventListener("blur", validateSubCategory);
 }
+
 
 function updateSubcategoryList(event) {
 	let categoryId = event.target.value;
 	fetch(serverUrl + "/spend/categories/" + categoryId)
 	.then(response => response.json())
 	.then(subcategories => {
-			console.log("Subcategories", subcategories);
 
 			// Remove previous subcategories
 			let currentOptionCount = subCategoryList.options.length;

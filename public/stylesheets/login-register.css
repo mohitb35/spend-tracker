@@ -98,7 +98,7 @@ a.button {
 	color: red;
 }
 
-.error input {
+.error input, .error.selector select {
 	border: 1px solid rgba(255,0,0,0.5);
 }
 

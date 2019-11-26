@@ -233,23 +233,32 @@
 				<section class="add-item-container">
 					<div class="form-header">
 						<h3>Add Spend</h3>
-						<button form="add-spend" type="submit" class="button small">Save</button>
+						<button form="add-spend-form" type="submit" class="button small">Save</button>
 					</div>
-					<form id="add-spend-form" action="#" method="GET" id="add-spend">
+					<form id="add-spend-form" action="#" method="GET">
 						<div class="form-field inline">
-							<label for="item-name">Name</label>
-							<input type="text" name="item-name" id="item-name" placeholder="What did you buy?">
+							<label for="item-name">Name *</label>
+							<div>
+								<input type="text" name="item-name" id="item-name" placeholder="What did you buy?">
+								<span class="error-message hidden">Test</span>
+							</div>
 						</div>
 						<div class="form-field inline">
-							<label for="date">Date</label>
-							<input type="date" name="date" id="date" placeholder="Select a date">
+							<label for="date">Date *</label>
+							<div>
+								<input type="date" name="date" id="date" placeholder="Select a date" min="">
+								<span class="error-message hidden">Test</span>
+							</div>
 						</div>
 						<div class="form-field inline">
-							<label for="amount">Amount</label>
-							<input type="number" name="amount" id="amount" placeholder="Enter amount">
+							<label for="amount">Amount *</label>
+							<div>
+								<input type="number" name="amount" id="amount" placeholder="Enter amount">
+								<span class="error-message hidden">Test</span>
+							</div>
 						</div>
 						<div class="form-field inline">
-							<label for="category">Category</label>
+							<label for="category">Category *</label>
 							<div class="selector">
 								<select name="category" id="category">
 									<option value = "" selected disabled hidden> --- Select --- </option>
@@ -257,15 +266,17 @@
 										<option value="<%= category.id %>"><%= category.name %></option>
 									<% }); %>
 								</select>
+								<span class="error-message hidden"></span>
 							</div>
+							
 						</div>
 						<div class="form-field inline">
-							<label for="sub-category">Sub-Category</label>
+							<label for="sub-category">Sub-Category *</label>
 							<div class="selector">
 								<select name="sub-category" id="sub-category">
 									<option value = "" selected disabled hidden> --- Select --- </option>
-									<option value = "1">Subcategory 1</option>
 								</select>
+								<span class="error-message hidden"></span>
 							</div>
 						</div>
 					</form>
