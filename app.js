@@ -6,11 +6,16 @@ const sessions = require('client-sessions');
 const fetch = require('node-fetch');
 
 const indexRoutes = require('./routes/index');
+const spendRoutes = require('./routes/spend');
 
 const app = express();
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
+
+app.use(bodyParser.urlencoded({
+	extended: true
+}));
 
 app.use(sessions({
 	cookieName: config.cookieName,
@@ -53,6 +58,7 @@ function loginRequired(req, res, next) {
 
 // Including Routes
 app.use('/', indexRoutes);
+app.use('/spend', spendRoutes);
 
 
 /* Frontend routes */

@@ -15,14 +15,19 @@ router.get("/login", (req, res) => {
 	res.render("login");
 });
 
-router.post("/login", (req,res, next) => {
+router.post("/login", (req,res) => {
+	let body = JSON.stringify({
+		email: req.body.email,
+		password: req.body.password
+	});
+	console.log(body);
 	fetch(config.serverUrl + "/login", {
 		method: "POST",
 		mode: "cors",
 		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded'
+			'Content-Type': 'application/json'
 		},
-		body: req
+		body: body
 	})
 	.then(response => response.json())
 	.then(response => {
@@ -48,13 +53,18 @@ router.get("/register", (req, res) => {
 });
 
 router.post("/register", (req, res) => {
+	let body = JSON.stringify({
+		name: req.body.name,
+		email: req.body.email,
+		password: req.body.password
+	});
 	fetch(config.serverUrl + "/register", {
 		method: "POST",
 		mode: "cors",
 		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded'
+			'Content-Type': 'application/json'
 		},
-		body: req
+		body: body
 	})
 	.then(response => response.json())
 	.then(response => {
