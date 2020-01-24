@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="/stylesheets/header-footer.css">
 	<link rel="stylesheet" href="/stylesheets/login-register.css">
 	<link rel="stylesheet" href="/stylesheets/dashboard.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
 	<title>Spend Tracker</title>
 </head>
 <body>
@@ -17,20 +18,26 @@
 				<div class="branding">
 					Spend Tracker
 				</div>
-				<div class="nav-elements-right">
-					<div class="date-selector">
-						<select name="" id="">
-							<option value="">May 2019</option>
-							<option value="">Jun 2019</option>
-							<option value="">Jul 2019</option>
-							<option value="">Aug 2019</option>
-							<option value="">Sep 2019</option>
-						</select>
+				<% 	if (page === "dashboard") { %>
+					<div class="nav-elements-right">
+						<div class="date-selector" id="spend-month-selector">
+							<select name="" id="">
+								<% if(typeof monthRange === "string"){ %>
+									<option value=""><%= monthRange %></option>
+								<% } else if (Array.isArray(monthRange)) {
+									monthRange.forEach(month => { %>
+										<option value="<%= month.date%>" <%= month.selected ? "selected" : "" %>><%= month.text %></option>
+								<% });
+								} else { %>
+									<option value="">Something went wrong</option>
+								<% } %>
+							</select>
+						</div>
+						<div class="profile-image">
+							<img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="profile">
+						</div>
 					</div>
-					<div class="profile-image">
-						<img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="profile">
-					</div>
-				</div>
+				<% } %>
 			</div>	
 		</nav>
 

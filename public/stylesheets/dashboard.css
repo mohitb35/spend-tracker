@@ -16,7 +16,7 @@
 	overflow: scroll;
 }
 
-.spend-item-list {
+#spend-item-list {
 	grid-area: left-col;
 	background-color: #f7f7f7;
 	overflow: scroll;

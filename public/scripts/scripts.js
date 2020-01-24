@@ -12,6 +12,8 @@ let spendDate = document.getElementById("date");
 let amount = document.getElementById("amount");
 let categoryList = document.getElementById("category");
 let subCategoryList = document.getElementById("sub-category");
+let monthSelector = document.getElementById("spend-month-selector");
+let spendList = document.getElementById("spend-item-list");
 
 function validateRegister(event) {
 	// Check name
@@ -319,3 +321,28 @@ function updateSubcategoryList(event) {
 		});
 	}
 
+
+// Add events for Month Selector (Spend List)
+if(monthSelector !== null) {
+	monthSelector.addEventListener('change', filterSpendsByMonth);
+}
+
+async function filterSpendsByMonth(event) {
+	let {firstDay, lastDay} = monthBounds(event.target.value);
+	let URL = `/dashboard?from=${firstDay}&to=${lastDay}`;
+	window.location = URL;
+}
+
+function monthBounds(filterDate) {
+	let date = new Date(filterDate);
+	let firstDay = new Date(date.getFullYear(), date.getMonth(), 1); 
+	let lastDay =  new Date(date.getFullYear(), date.getMonth() + 1, 0); 
+	return {
+		firstDay: toDateString(firstDay),
+		lastDay: toDateString(lastDay)
+	}
+}
+
+function toDateString(date) {
+	return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
+}

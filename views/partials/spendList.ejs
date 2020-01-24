@@ -1,0 +1,35 @@
+<section id="spend-item-list">
+	<% if(typeof spends === "string") { %>
+		<div><%= spends %></div>
+	<% } else if (Array.isArray(spends)) { 
+		spends.forEach(spend => { 
+	%>
+		<div class="spend-item" data-spend-id="<%= spend.id %>">
+			<div class="date-box">
+				<div class="date"><%= new Date(spend.purchase_date).getDate() %></div>
+			</div>
+			<div class="category-box">
+				<div class="category"><%= spend.category_name %></div>
+				<div class="separator">
+					<img src="/media/separator.svg" alt="separator">
+				</div>
+				<div class="sub-category"><%= spend.sub_category_name %></div>
+			</div>
+			<div class="item-box">
+				<div class="item-name"><%= spend.name %></div>
+				<div class="item-amount"><%= spend.amount %></div>
+			</div>
+			<div class="edit-box">
+				<a href="">
+					<img src="/media/edit-icon.svg" alt="">
+				</a>
+			</div>
+			<div class="delete-box">
+				<a href="">
+					<img src="/media/delete-icon.svg" alt="">
+				</a>
+			</div>
+		</div>
+
+	<%	})} %>
+</section>

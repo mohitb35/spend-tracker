@@ -3,7 +3,7 @@ const config = require('../config');
 const express = require('express');
 const router = express.Router();
 
-const fetch = require('node-fetch');
+const axios = require('axios');
 
 
 // Landing Page/Login
@@ -12,76 +12,73 @@ router.get("/", (req, res) => {
 });
 
 router.get("/login", (req, res) => {
-	res.render("login");
+	res.render("login", {page:"login"});
 });
 
-router.post("/login", (req,res) => {
+router.post("/login", async (req,res) => {
 	let body = JSON.stringify({
 		email: req.body.email,
 		password: req.body.password
 	});
-	console.log(body);
-	fetch(config.serverUrl + "/login", {
-		method: "POST",
-		mode: "cors",
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: body
-	})
-	.then(response => response.json())
-	.then(response => {
-		if(response.user_id){
-			req.session.userId = response.user_id;
-			req.session.userName = response.name;
-			req.session.token = response.token;
-			// res.locals.user = user;
-			res.redirect('/dashboard');
-		} else {
-			throw Error(response);
-		}
-	})
-	.catch(err => {
-		console.log(err);
-		res.render("login");
-	})
-});
+
+	try {
+		const response = await axios.post(
+			config.serverUrl + "/login", 
+			body,
+			{
+				headers: {
+					'Content-Type': 'application/json'
+				}
+		})
+
+		const user = response.data;
+
+		req.session.userId = user.user_id;
+		req.session.userName = user.name;
+		req.session.token = user.token;
+		
+		res.redirect('/dashboard');
+
+	} catch (error) {
+		console.log("Error while logging in:", error.response.data, error.response.status, error.response.statusText);
+		res.render("login", {page:"login"});
+	}
+}); 
 
 
 router.get("/register", (req, res) => {
-	res.render("register");
+	res.render("register", {page:"register"});
 });
 
-router.post("/register", (req, res) => {
+router.post("/register", async (req, res) => {
 	let body = JSON.stringify({
 		name: req.body.name,
 		email: req.body.email,
 		password: req.body.password
 	});
-	fetch(config.serverUrl + "/register", {
-		method: "POST",
-		mode: "cors",
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: body
-	})
-	.then(response => response.json())
-	.then(response => {
-		if(response.user_id){
-			req.session.userId = response.user_id;
-			req.session.userName = response.name;
-			req.session.token = response.token;
-			res.redirect('/dashboard');
-		} else {
-			throw Error(response);
-		}
-	})
-	.catch(err =>  {
-		console.log(err);
-		res.render("register");
-	})
-});
 
+	try {
+		const response = await axios.post(
+			config.serverUrl + "/register", 
+			body,
+			{
+				headers: {
+					'Content-Type': 'application/json'
+				}
+		});
+
+		const user = response.data;
+
+		req.session.userId = user.user_id;
+		req.session.userName = user.name;
+		req.session.token = user.token;
+		
+		res.redirect('/dashboard');
+
+	} catch (error) {
+		console.log("Error while registering:", error.response.data, error.response.status, error.response.statusText);
+		res.render("register", {page:"register"});
+	}
+});
 
 module.exports = router;
