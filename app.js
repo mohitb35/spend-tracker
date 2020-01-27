@@ -101,8 +101,8 @@ function getMonths(minDateStr, maxDateStr, fromDateStr){
 	return monthRange;
 }
 
-function monthBounds() {
-	let date = new Date();
+function monthBounds(filterDate) {
+	let date = new Date(filterDate);
 	let firstDay = new Date(date.getFullYear(), date.getMonth(), 1); 
 	let lastDay =  new Date(date.getFullYear(), date.getMonth() + 1, 0); 
 	return {
@@ -150,12 +150,12 @@ app.get("/dashboard", loginRequired, async (req, res) => {
 				let lastMonth = monthBounds(monthRange[monthRange.length-1].date);
 				fromDate = lastMonth.firstDay;
 				toDate = lastMonth.lastDay;
+				console.log(fromDate, toDate);
 			}
 		}
 	} 
 	catch(error) {
-		console.log(error);
-		// console.log("Error fetching spend dates:", error.response.data, error.response.status, error.response.statusText);
+		console.log("Error fetching spend dates:", error.response.data, error.response.status, error.response.statusText);
 		monthRange = "Something went wrong";
 	}
 	
@@ -172,7 +172,7 @@ app.get("/dashboard", loginRequired, async (req, res) => {
 		console.log(spends);
 	} 
 	catch(error) {
-		console.log("Error fetching spends:", error);
+		console.log("Error fetching spends:", error.response.data, error.response.status, error.response.statusText);
 	}
 
 	res.render("dashboard", {token: token, categories: categories, monthRange: monthRange, spends: spends, fromDate: fromDate, page: "dashboard"});
