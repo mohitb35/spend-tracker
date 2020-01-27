@@ -1,8 +1,11 @@
 #Local Files
 .DS_Store
+.vscode/*
+.vscode/launch.json
 
 #config files
 *config*
 
 #Node Modules
 node_modules/
+
