@@ -14,6 +14,12 @@ let categoryList = document.getElementById("category");
 let subCategoryList = document.getElementById("sub-category");
 let monthSelector = document.getElementById("spend-month-selector");
 let spendList = document.getElementById("spend-item-list");
+let spendItems = document.getElementsByClassName("spend-items");
+let deleteItemButtons = document.querySelectorAll(".delete-box a");
+let deleteCloseButton = document.getElementById("delete-modal-close");
+let deleteCancelButton = document.getElementById("delete-modal-cancel");
+let deleteConfirmButton = document.getElementById("delete-modal-confirm");
+
 
 function validateRegister(event) {
 	// Check name
@@ -291,6 +297,16 @@ if(addSpendForm !== null) {
 	subCategoryList.addEventListener("blur", validateSubCategory);
 }
 
+// Add events for spend list
+if(spendList !== null) {
+	deleteItemButtons.forEach((element) => {
+		element.addEventListener("click", toggleDeleteModal);
+	})
+	deleteCloseButton.addEventListener("click", toggleDeleteModal);
+	deleteCancelButton.addEventListener("click", toggleDeleteModal);
+	deleteConfirmButton.addEventListener("click", confirmDelete);
+}
+
 
 function updateSubcategoryList(event) {
 	let categoryId = event.target.value;
@@ -345,4 +361,29 @@ function monthBounds(filterDate) {
 
 function toDateString(date) {
 	return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
+}
+
+function toggleDeleteModal(event) {
+	let element = event.currentTarget;
+	let target = document.getElementById(element.dataset.target);
+
+	if(!target.classList.contains('displayed')){
+		target.dataset.spendId = element.dataset.spendId;
+	} else {
+		target.dataset.spendId = null;
+	}
+
+	target.classList.toggle('displayed');
+}
+
+async function confirmDelete(event) {
+	let element =  event.currentTarget;
+	let target = document.getElementById(element.dataset.target);
+	
+	const response = await axios.delete(`/spend/${target.dataset.spendId}`);
+	target.classList.toggle('displayed');
+
+	if(response.status == 200){
+		location.reload();
+	}
 }

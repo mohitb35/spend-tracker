@@ -34,21 +34,23 @@ router.post("/", async (req,res) => {
 	catch(error) {
 		console.log("Error while adding spend:", error.response.data, error.response.status, error.response.statusText);
 	}
+});
 
-	
-	/* .then(response => {
-		if(response.id){
-			console.log("Added spend successfully");
-			res.redirect('/dashboard');
-		} else {
-			console.log(response);
-			res.redirect('back');
-		}
-	})
-	.catch(err => {
-		console.log(err);
-		res.redirect('back');
-	})  */
+// Delete Spend Route
+router.delete('/:id', async(req, res) => {
+
+	try {
+		const response = await axios.delete(config.serverUrl + "/spend/" + req.params.id,{
+			data: {
+				token: req.session.token
+			}
+		});
+		res.status(200).json("Deleted spend");
+	}
+	catch(error) {
+		console.log("Error while deleting spend:", error.response.data, error.response.status, error.response.statusText);
+		res.status(400).json(error.response.data);
+	}
 });
 
 // List Spends Route
