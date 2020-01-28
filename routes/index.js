@@ -81,4 +81,23 @@ router.post("/register", async (req, res) => {
 	}
 });
 
+router.get('/logout', (req,res) => {
+	let token = req.session.token;
+	let userId = req.session.userId;
+
+	try {
+		axios.get(config.serverUrl + `/logout`, {
+			data: {
+				userId: userId,
+				token: token
+			}
+		});
+	} catch(error) {
+		console.log("Error while logging out:", error.response.data, error.response.status, error.response.statusText);
+	}
+
+	req.session.reset();
+	res.redirect('/login');
+});
+
 module.exports = router;

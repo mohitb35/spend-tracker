@@ -128,6 +128,7 @@ app.get("/dashboard", loginRequired, async (req, res) => {
 	let toDate = req.query.to;
 
 	let token = req.session.token;
+	let userName = req.session.userName;
 	let categories, monthRange, spends;
 	// get list of categories
 	try {
@@ -175,7 +176,7 @@ app.get("/dashboard", loginRequired, async (req, res) => {
 		console.log("Error fetching spends:", error.response.data, error.response.status, error.response.statusText);
 	}
 
-	res.render("dashboard", {token: token, categories: categories, monthRange: monthRange, spends: spends, fromDate: fromDate, page: "dashboard"});
+	res.render("dashboard", {token: token, userName: userName, categories: categories, monthRange: monthRange, spends: spends, fromDate: fromDate, page: "dashboard"});
 });
 
 //404 Route
