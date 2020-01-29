@@ -19,6 +19,8 @@ let deleteItemButtons = document.querySelectorAll(".delete-box a");
 let deleteCloseButton = document.getElementById("delete-modal-close");
 let deleteCancelButton = document.getElementById("delete-modal-cancel");
 let deleteConfirmButton = document.getElementById("delete-modal-confirm");
+let editItemButtons = document.querySelectorAll(".edit-box a");
+let editCloseButton = document.getElementById("edit-modal-close");
 
 
 function validateRegister(event) {
@@ -300,11 +302,19 @@ if(addSpendForm !== null) {
 // Add events for spend list
 if(spendList !== null) {
 	deleteItemButtons.forEach((element) => {
-		element.addEventListener("click", toggleDeleteModal);
+		element.addEventListener("click", toggleModal);
 	})
-	deleteCloseButton.addEventListener("click", toggleDeleteModal);
-	deleteCancelButton.addEventListener("click", toggleDeleteModal);
+
+	editItemButtons.forEach((element) => {
+		element.addEventListener("click", toggleModal);
+	})
+	
+	deleteCloseButton.addEventListener("click", toggleModal);
+	editCloseButton.addEventListener("click", toggleModal);
+
+	deleteCancelButton.addEventListener("click", toggleModal);
 	deleteConfirmButton.addEventListener("click", confirmDelete);
+
 }
 
 
@@ -363,7 +373,7 @@ function toDateString(date) {
 	return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
 }
 
-function toggleDeleteModal(event) {
+function toggleModal(event) {
 	let element = event.currentTarget;
 	let target = document.getElementById(element.dataset.target);
 

@@ -170,6 +170,11 @@
 	justify-self: start;
 }
 
+.form-field.inline input[type=text]
+{
+	width: calc(100% - 0.4rem - 4px);
+}
+
 .selector select, .stats-selector select{
 	-webkit-appearance: none;
 	-moz-appearance: none;
@@ -205,13 +210,13 @@
 	align-items: center;
 }
 
-#delete-modal{
+#delete-modal, #edit-modal{
 	top: 0; left: 0; position: fixed; width: 100%; height: 120%;
 	background-color: rgba(0,0,0,0.7); 
 	display: none;
 }
 
-#delete-modal.displayed{
+#delete-modal.displayed, #edit-modal.displayed{
 	display:block;
 }
 
@@ -219,6 +224,14 @@
 	width: 550px; 
 	margin: 200px auto; 
 	text-align: center;
+}
+
+#edit-modal .form-field.inline {
+	text-align: left;
+}
+
+#edit-modal .form-field.inline div{
+	text-align: left;
 }
 
 .popup-box-content{
@@ -241,4 +254,9 @@
 
 #delete-form {
 	display: inline;
+}
+
+.edit-item-container {
+	padding: 1rem;
+	padding-bottom: 0;
 }

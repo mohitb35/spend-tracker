@@ -20,8 +20,8 @@
 				<div class="item-amount"><%= spend.amount %></div>
 			</div>
 			<div class="edit-box">
-				<a href="">
-					<img src="/media/edit-icon.svg" alt="">
+				<a href="javascript:void(0)" data-target="edit-modal" data-spend-id="<%= spend.id %>">
+					<img src="/media/edit-icon.svg" alt="" data-target="delete-modal">
 				</a>
 			</div>
 			<div class="delete-box">

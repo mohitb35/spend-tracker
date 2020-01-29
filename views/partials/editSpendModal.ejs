@@ -1,0 +1,60 @@
+<div id="edit-modal">
+	<div class="popup-box-wrapper">
+		<div class="popup-box-content">
+			<div class="close" id="edit-modal-close" data-target="edit-modal">
+				<a href="javascript:void(0)">
+					<img src="/media/close.svg" alt="close-edit-popup">
+				</a>
+			</div>
+			<p class="popup-message">Edit this spend?</p>
+			<section class="edit-item-container">
+				<form id="edit-spend-form" action="/spend" method="POST">
+					<div class="form-field inline">
+						<label for="item-name">Name *</label>
+						<div>
+							<input type="text" name="item-name" id="edit-item-name" placeholder="What did you buy?">
+							<span class="error-message hidden">Test</span>
+						</div>
+					</div>
+					<div class="form-field inline">
+						<label for="edit-date">Date *</label>
+						<div>
+							<input type="date" name="date" id="edit-date" placeholder="Select a date" min="">
+							<span class="error-message hidden">Test</span>
+						</div>
+					</div>
+					<div class="form-field inline">
+						<label for="edit-amount">Amount *</label>
+						<div>
+							<input type="number" name="amount" id="edit-amount" placeholder="Enter amount">
+							<span class="error-message hidden">Test</span>
+						</div>
+					</div>
+					<div class="form-field inline">
+						<label for="edit-category">Category *</label>
+						<div class="selector">
+							<select name="category" id="edit-category">
+								<option value = "" selected disabled hidden> --- Select --- </option>
+								<% categories.forEach(category => { %>
+									<option value="<%= category.id %>"><%= category.name %></option>
+								<% }); %>
+							</select>
+							<span class="error-message hidden"></span>
+						</div>
+						
+					</div>
+					<div class="form-field inline">
+						<label for="edit-sub-category">Sub-Category *</label>
+						<div class="selector">
+							<select name="sub-category" id="edit-sub-category">
+								<option value = "" selected disabled hidden> --- Select --- </option>
+							</select>
+							<span class="error-message hidden"></span>
+						</div>
+					</div>
+				</form>
+			</section>
+			<button form="add-spend-form" type="submit" class="button small">Save</button>
+		</div>
+	</div>
+</div>
