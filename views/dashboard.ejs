@@ -11,30 +11,30 @@
 					</div>
 					<form id="add-spend-form" action="/spend" method="POST">
 						<div class="form-field inline">
-							<label for="item-name">Name *</label>
+							<label for="add-item-name">Name *</label>
 							<div>
-								<input type="text" name="item-name" id="item-name" placeholder="What did you buy?">
+								<input type="text" name="item-name" id="add-item-name" placeholder="What did you buy?">
 								<span class="error-message hidden">Test</span>
 							</div>
 						</div>
 						<div class="form-field inline">
-							<label for="date">Date *</label>
+							<label for="add-item-date">Date *</label>
 							<div>
-								<input type="date" name="date" id="date" placeholder="Select a date" min="">
+								<input type="date" name="date" id="add-item-date" placeholder="Select a date" min="">
 								<span class="error-message hidden">Test</span>
 							</div>
 						</div>
 						<div class="form-field inline">
-							<label for="amount">Amount *</label>
+							<label for="add-item-amount">Amount *</label>
 							<div>
-								<input type="number" name="amount" id="amount" placeholder="Enter amount">
+								<input type="number" name="amount" id="add-item-amount" placeholder="Enter amount">
 								<span class="error-message hidden">Test</span>
 							</div>
 						</div>
 						<div class="form-field inline">
-							<label for="category">Category *</label>
+							<label for="add-item-category">Category *</label>
 							<div class="selector">
-								<select name="category" id="category">
+								<select name="category" id="add-item-category">
 									<option value = "" selected disabled hidden> --- Select --- </option>
 									<% categories.forEach(category => { %>
 										<option value="<%= category.id %>"><%= category.name %></option>
@@ -45,9 +45,9 @@
 							
 						</div>
 						<div class="form-field inline">
-							<label for="sub-category">Sub-Category *</label>
+							<label for="add-item-sub-category">Sub-Category *</label>
 							<div class="selector">
-								<select name="sub-category" id="sub-category">
+								<select name="sub-category" id="add-item-sub-category">
 									<option value = "" selected disabled hidden> --- Select --- </option>
 								</select>
 								<span class="error-message hidden"></span>

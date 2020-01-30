@@ -8,32 +8,32 @@
 			</div>
 			<p class="popup-message">Edit this spend?</p>
 			<section class="edit-item-container">
-				<form id="edit-spend-form" action="/spend" method="POST">
+				<form id="edit-spend-form" action="/spend/null?_method=PUT" method="POST">
 					<div class="form-field inline">
-						<label for="item-name">Name *</label>
+						<label for="edit-item-name">Name *</label>
 						<div>
 							<input type="text" name="item-name" id="edit-item-name" placeholder="What did you buy?">
 							<span class="error-message hidden">Test</span>
 						</div>
 					</div>
 					<div class="form-field inline">
-						<label for="edit-date">Date *</label>
+						<label for="edit-item-date">Date *</label>
 						<div>
-							<input type="date" name="date" id="edit-date" placeholder="Select a date" min="">
+							<input type="date" name="date" id="edit-item-date" placeholder="Select a date" min="">
 							<span class="error-message hidden">Test</span>
 						</div>
 					</div>
 					<div class="form-field inline">
-						<label for="edit-amount">Amount *</label>
+						<label for="edit-item-amount">Amount *</label>
 						<div>
-							<input type="number" name="amount" id="edit-amount" placeholder="Enter amount">
+							<input type="number" name="amount" id="edit-item-amount" placeholder="Enter amount">
 							<span class="error-message hidden">Test</span>
 						</div>
 					</div>
 					<div class="form-field inline">
-						<label for="edit-category">Category *</label>
+						<label for="edit-item-category">Category *</label>
 						<div class="selector">
-							<select name="category" id="edit-category">
+							<select name="category" id="edit-item-category">
 								<option value = "" selected disabled hidden> --- Select --- </option>
 								<% categories.forEach(category => { %>
 									<option value="<%= category.id %>"><%= category.name %></option>
@@ -44,9 +44,9 @@
 						
 					</div>
 					<div class="form-field inline">
-						<label for="edit-sub-category">Sub-Category *</label>
+						<label for="edit-item-sub-category">Sub-Category *</label>
 						<div class="selector">
-							<select name="sub-category" id="edit-sub-category">
+							<select name="sub-category" id="edit-item-sub-category">
 								<option value = "" selected disabled hidden> --- Select --- </option>
 							</select>
 							<span class="error-message hidden"></span>
@@ -54,7 +54,7 @@
 					</div>
 				</form>
 			</section>
-			<button form="add-spend-form" type="submit" class="button small">Save</button>
+			<button form="edit-spend-form" type="submit" class="button small">Save</button>
 		</div>
 	</div>
 </div>

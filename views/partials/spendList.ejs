@@ -3,30 +3,41 @@
 		<div><%= spends %></div>
 	<% } else if (Array.isArray(spends)) { 
 		spends.forEach(spend => { 
+			let { id, category_name, category_id, sub_category_name, sub_category_id, name, amount } = spend;
+			let spendDate = new Date(spend.purchase_date);
 	%>
-		<div class="spend-item" data-spend-id="<%= spend.id %>">
+		<div class="spend-item" data-spend-id="<%= id %>">
 			<div class="date-box">
-				<div class="date"><%= new Date(spend.purchase_date).getDate() %></div>
+				<div class="date"><%= spendDate.getDate() %></div>
 			</div>
 			<div class="category-box">
-				<div class="category"><%= spend.category_name %></div>
+				<div class="category"><%= category_name %></div>
 				<div class="separator">
 					<img src="/media/separator.svg" alt="separator">
 				</div>
-				<div class="sub-category"><%= spend.sub_category_name %></div>
+				<div class="sub-category"><%= sub_category_name %></div>
 			</div>
 			<div class="item-box">
-				<div class="item-name"><%= spend.name %></div>
-				<div class="item-amount"><%= spend.amount %></div>
+				<div class="item-name"><%= name %></div>
+				<div class="item-amount"><%= amount %></div>
 			</div>
 			<div class="edit-box">
-				<a href="javascript:void(0)" data-target="edit-modal" data-spend-id="<%= spend.id %>">
-					<img src="/media/edit-icon.svg" alt="" data-target="delete-modal">
+				<a href="javascript:void(0)" data-target="edit-modal" 
+					data-spend-id="<%= id %>"
+					data-spend-name="<%= name%>" 
+					data-spend-date="<%= spendDate%>" 
+					data-spend-amount="<%= amount%>" 
+					data-spend-category="<%= category_name%>"
+					data-spend-category-id="<%= category_id%>" 
+					data-spend-sub-category="<%= sub_category_name%>" 
+					data-spend-sub-category-id="<%= sub_category_id%>" 
+				>
+					<img src="/media/edit-icon.svg" alt="">
 				</a>
 			</div>
 			<div class="delete-box">
 				<a href="javascript:void(0)" data-target="delete-modal" data-spend-id="<%= spend.id %>">
-					<img src="/media/delete-icon.svg" alt="" data-target="delete-modal">
+					<img src="/media/delete-icon.svg" alt="">
 				</a>
 			</div>
 		</div>

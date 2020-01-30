@@ -6,12 +6,21 @@ let name = document.getElementById("name");
 let email = document.getElementById("email");
 let password = document.getElementById("password");
 let loginPassword = document.getElementById("login-password");
+
 let addSpendForm = document.getElementById("add-spend-form");
-let itemName = document.getElementById("item-name");
-let spendDate = document.getElementById("date");
-let amount = document.getElementById("amount");
-let categoryList = document.getElementById("category");
-let subCategoryList = document.getElementById("sub-category");
+let addItemName = document.getElementById("add-item-name");
+let addItemSpendDate = document.getElementById("add-item-date");
+let addItemAmount = document.getElementById("add-item-amount");
+let addItemCategoryList = document.getElementById("add-item-category");
+let addItemSubCategoryList = document.getElementById("add-item-sub-category");
+
+let editSpendForm = document.getElementById("edit-spend-form");
+let editItemName = document.getElementById("edit-item-name");
+let editItemSpendDate = document.getElementById("edit-item-date");
+let editItemAmount = document.getElementById("edit-item-amount");
+let editItemCategoryList = document.getElementById("edit-item-category");
+let editItemSubCategoryList = document.getElementById("edit-item-sub-category");
+
 let monthSelector = document.getElementById("spend-month-selector");
 let spendList = document.getElementById("spend-item-list");
 let spendItems = document.getElementsByClassName("spend-items");
@@ -73,19 +82,6 @@ function validateName(event) {
 	handleError(event, error, formElement, errorMessage);
 };
 
-function isTextInvalid(nameText, type) {
-	if (nameText === "") {
-		if (type == "name"){
-			return "Please enter your name";
-		}
-		 if (type == "item-name") {
-			return "Please enter the item name";
-		 }
-	}
-
-	return false;
-}
-
 function validateEmail(event) {
 	let formElement = event.target.parentNode;
 	let errorMessage = formElement.lastElementChild;
@@ -93,20 +89,6 @@ function validateEmail(event) {
 
 	handleError(event, error, formElement, errorMessage);
 };
-
-function isEmailInvalid(emailText) {
-	let reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/
-
-	if (emailText === "") {
-		return "Please enter your email address";
-	}
-
-	if (!reg.test(emailText)){
-		return "Hmmm..the email address entered seems invalid";
-	}
-
-	return false;
-}
 
 function validatePassword(event) {
 	let formElement = event.target.parentNode;
@@ -121,6 +103,34 @@ function validatePassword(event) {
 	handleError(event, error, formElement, errorMessage);
 	
 };
+
+
+function isTextInvalid(nameText, type) {
+	if (nameText === "") {
+		if (type == "name"){
+			return "Please enter your name";
+		}
+		 if (type == "item-name") {
+			return "Please enter the item name";
+		 }
+	}
+
+	return false;
+}
+
+function isEmailInvalid(emailText) {
+	let reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/
+
+	if (emailText === "") {
+		return "Please enter your email address";
+	}
+
+	if (!reg.test(emailText)){
+		return "Hmmm..the email address entered seems invalid";
+	}
+
+	return false;
+}
 
 function isPasswordInvalid(passwordText, isLogin){
 	if (passwordText === "") {
@@ -155,7 +165,14 @@ function handleError(event, error, formElement, errorMessage) {
 	}
 }
 
-function validateAddSpend(event) {
+function validateAddEditSpendForm(event) {
+	let formSubmitted = event.currentTarget;
+	let itemName = formSubmitted.querySelector("input[name='item-name']");
+	let spendDate = formSubmitted.querySelector("input[name='date']");
+	let amount = formSubmitted.querySelector("input[name='amount']");
+	let categoryList = formSubmitted.querySelector("select[name='category']");
+	let subCategoryList = formSubmitted.querySelector("select[name='sub-category']");
+
 	// Check item name
 	let itemNameError = isTextInvalid(itemName.value, "item-name");
 	let itemNameFormElement = itemName.parentNode;
@@ -288,15 +305,34 @@ if(loginForm !== null) {
 
 // Add events for Add Spend Form
 if(addSpendForm !== null) {
-	addSpendForm.addEventListener("submit", validateAddSpend);
-	itemName.addEventListener("blur", validateItemName);
-	itemName.addEventListener("keyup", validateItemName);
-	spendDate.addEventListener("blur", validateSpendDate);
-	amount.addEventListener("blur", validateAmount);
-	amount.addEventListener("keyup", validateAmount);
-	categoryList.addEventListener("change", updateSubcategoryList);
-	categoryList.addEventListener("blur", validateCategory);
-	subCategoryList.addEventListener("blur", validateSubCategory);
+	addSpendForm.addEventListener("submit", validateAddEditSpendForm);
+	addItemName.addEventListener("blur", validateItemName);
+	addItemName.addEventListener("keyup", validateItemName);
+	addItemSpendDate.addEventListener("blur", validateSpendDate);
+	addItemSpendDate.addEventListener("change", validateSpendDate);
+	addItemAmount.addEventListener("blur", validateAmount);
+	addItemAmount.addEventListener("keyup", validateAmount);
+	addItemCategoryList.addEventListener("change", updateSubcategoryList);
+	addItemCategoryList.addEventListener("blur", validateCategory);
+	addItemCategoryList.addEventListener("change", validateCategory);
+	addItemSubCategoryList.addEventListener("blur", validateSubCategory);
+	addItemSubCategoryList.addEventListener("change", validateSubCategory);
+}
+
+// Add events for Edit Spend Form
+if(editSpendForm !== null) {
+	editSpendForm.addEventListener("submit", validateAddEditSpendForm);
+	editItemName.addEventListener("blur", validateItemName);
+	editItemName.addEventListener("keyup", validateItemName);
+	editItemSpendDate.addEventListener("blur", validateSpendDate);
+	editItemSpendDate.addEventListener("change", validateSpendDate);
+	editItemAmount.addEventListener("blur", validateAmount);
+	editItemAmount.addEventListener("keyup", validateAmount);
+	editItemCategoryList.addEventListener("change", updateSubcategoryList);
+	editItemCategoryList.addEventListener("blur", validateCategory);
+	editItemCategoryList.addEventListener("change", validateCategory);
+	editItemSubCategoryList.addEventListener("blur", validateSubCategory);
+	editItemSubCategoryList.addEventListener("change", validateSubCategory);
 }
 
 // Add events for spend list
@@ -317,35 +353,44 @@ if(spendList !== null) {
 
 }
 
-
 function updateSubcategoryList(event) {
 	let categoryId = event.target.value;
+	let parentForm = event.target.form;
+	let targetSubCategoryList = parentForm.querySelector("select[name='sub-category']");
+
+	populateSubcategoryList(categoryId, targetSubCategoryList);
+}
+
+function populateSubcategoryList(categoryId, targetSubCategoryList, selectedSubcategoryId = null){
 	fetch(serverUrl + "/spend/categories/" + categoryId)
 	.then(response => response.json())
 	.then(subcategories => {
+		// Remove previous subcategories
+		let currentOptionCount = targetSubCategoryList.options.length;
 
-			// Remove previous subcategories
-			let currentOptionCount = subCategoryList.options.length;
+		for(let i = currentOptionCount; i>1; i--) {
+			targetSubCategoryList.removeChild(targetSubCategoryList.options[i-1]);
+		}
 
-			for(let i = currentOptionCount; i>1; i--) {
-				subCategoryList.removeChild(subCategoryList.options[i-1]);
-			}
-
-			if(Array.isArray(subcategories)) {
-				subCategoryList.options[0].innerText = "--- Select ---";
-				// Add fetched subcategories
-				subcategories.forEach(subcategory => {
-					let opt = document.createElement('option');
-					opt.innerText = subcategory.name;
-					opt.value = subcategory.id;
-					subCategoryList.appendChild(opt);
-				});
-			} else {
-				// If there are no subcategories found, show the error text
-				subCategoryList.options[0].innerText = subcategories;
-			}
-		});
-	}
+		if(Array.isArray(subcategories)) {
+			targetSubCategoryList.options[0].innerText = "--- Select ---";
+			// Add fetched subcategories
+			subcategories.forEach(subcategory => {
+				let opt = document.createElement('option');
+				opt.innerText = subcategory.name;
+				opt.value = subcategory.id;
+				if(subcategory.id == selectedSubcategoryId){
+					opt.selected = true;
+				}
+				targetSubCategoryList.appendChild(opt);
+			});
+		} else {
+			// If there are no subcategories found, show the error text
+			targetSubCategoryList.options[0].innerText = subcategories;
+			targetSubCategoryList.options[0].selected = true;
+		}
+	});
+}
 
 
 // Add events for Month Selector (Spend List)
@@ -375,15 +420,49 @@ function toDateString(date) {
 
 function toggleModal(event) {
 	let element = event.currentTarget;
-	let target = document.getElementById(element.dataset.target);
+	let data = element.dataset;
+	let target = data.target;
+	let targetModal = document.getElementById(target);
 
-	if(!target.classList.contains('displayed')){
-		target.dataset.spendId = element.dataset.spendId;
+	if(!targetModal.classList.contains('displayed')){
+		targetModal.dataset.spendId = data.spendId;
+
+		if(target === 'edit-modal'){
+			updateEditForm(targetModal, data);
+		}
 	} else {
-		target.dataset.spendId = null;
+		targetModal.dataset.spendId = null;
+		if(target === 'edit-modal'){
+			clearEditForm(targetModal);
+		}
 	}
 
-	target.classList.toggle('displayed');
+	targetModal.classList.toggle('displayed');
+}
+
+function updateEditForm(editModal, data) {
+	let form = editModal.querySelector('form');
+	form.action = '/spend/' + editModal.dataset.spendId + '?_method=PUT';
+	
+	let nameInput = form.querySelector("input[name='item-name']");
+	let dateInput = form.querySelector("input[name='date']");
+	let amountInput = form.querySelector("input[name='amount']");
+	let categorySelect = form.querySelector("select[name='category']");
+	let subCategorySelect = form.querySelector("select[name='sub-category']");
+
+	nameInput.value = data.spendName;
+	dateInput.value = data.spendDate;
+	amountInput.value = data.spendAmount;
+	categorySelect.value = data.spendCategoryId;
+	populateSubcategoryList(data.spendCategoryId, subCategorySelect, data.spendSubCategoryId);
+}
+
+function clearEditForm(editModal) {
+	let form = editModal.querySelector('form');
+	form.action = ''; 
+	
+	// Clear form data
+	form.reset();
 }
 
 async function confirmDelete(event) {

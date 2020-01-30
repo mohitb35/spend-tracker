@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const sessions = require('client-sessions');
 const axios = require('axios');
+const methodOverride = require('method-override');
 
 const indexRoutes = require('./routes/index');
 const spendRoutes = require('./routes/spend');
@@ -16,6 +17,8 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({
 	extended: true
 }));
+
+app.use(methodOverride("_method"));
 
 app.use(sessions({
 	cookieName: config.cookieName,
