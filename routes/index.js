@@ -5,13 +5,20 @@ const router = express.Router();
 
 const axios = require('axios');
 
+function isLoggedIn(req, res, next) {
+	if (req.session.token) {
+		return res.redirect("/dashboard");
+	}
+
+	next();
+}
 
 // Landing Page/Login
-router.get("/", (req, res) => {
+router.get("/", isLoggedIn, (req, res) => {
 	res.redirect(301, "/login");
 });
 
-router.get("/login", (req, res) => {
+router.get("/login", isLoggedIn, (req, res) => {
 	res.render("login", {page:"login"});
 });
 
@@ -46,7 +53,7 @@ router.post("/login", async (req,res) => {
 }); 
 
 
-router.get("/register", (req, res) => {
+router.get("/register", isLoggedIn, (req, res) => {
 	res.render("register", {page:"register"});
 });
 
