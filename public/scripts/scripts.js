@@ -415,7 +415,8 @@ function monthBounds(filterDate) {
 }
 
 function toDateString(date) {
-	return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
+	return date.getFullYear().toString() + '-' + (date.getMonth() + 1).toString().padStart(2, 0) +
+    '-' + date.getDate().toString().padStart(2, 0);
 }
 
 function toggleModal(event) {
@@ -451,7 +452,7 @@ function updateEditForm(editModal, data) {
 	let subCategorySelect = form.querySelector("select[name='sub-category']");
 
 	nameInput.value = data.spendName;
-	dateInput.value = data.spendDate;
+	dateInput.value = toDateString(new Date(data.spendDate));
 	amountInput.value = data.spendAmount;
 	categorySelect.value = data.spendCategoryId;
 	populateSubcategoryList(data.spendCategoryId, subCategorySelect, data.spendSubCategoryId);
