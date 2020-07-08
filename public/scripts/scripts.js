@@ -77,7 +77,7 @@ function validateLogin(event) {
 function validateName(event) {
 	let formElement = event.target.parentNode;
 	let errorMessage = formElement.lastElementChild;
-	let error = isNameInvalid(event.target.value, "name");
+	let error = isTextInvalid(event.target.value, "name");
 
 	handleError(event, error, formElement, errorMessage);
 };
