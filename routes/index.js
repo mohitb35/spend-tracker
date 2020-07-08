@@ -48,13 +48,19 @@ router.post("/login", async (req,res) => {
 
 	} catch (error) {
 		let errorMessage = "";
-		console.log("Error while logging in:", error.response.data, error.response.status, error.response.statusText);
 		
-		if (error.response.status === 401 || error.response.status === 400){
-			errorMessage = "Invalid credentials. Please check your email and password";
+		if (error.response){
+			console.log("Error while logging in:", error.response.data, error.response.status, error.response.statusText);
+			if (error.response.status === 401 || error.response.status === 400){
+				errorMessage = "Invalid credentials. Please check your email and password";
+			} else {
+				errorMessage = "Oops, something went wrong. Please try again after some time";
+			}
 		} else {
-			errorMessage = "Oops, something went wrong. Please try again after some time";
+			console.log(error);
+			errorMessage = "Oops, the server's not responding. Please try again after some time";
 		}
+		
 		res.render("login", {page:"login", errorMessage});
 	}
 }); 
@@ -90,13 +96,18 @@ router.post("/register", async (req, res) => {
 		res.redirect('/dashboard');
 
 	} catch (error) {
-		errorMessage = "";
-		console.log("Error while registering:", error.response.data, error.response.status, error.response.statusText);
-
-		if (error.response.status === 409 ){
-			errorMessage = "You seem to have already registered. Please log in, or check the email entered.";
+		let errorMessage = "";
+		
+		if (error.response){
+			console.log("Error while registering:", error.response.data, error.response.status, error.response.statusText);
+			if (error.response.status === 409 ){
+				errorMessage = "You seem to have already registered. Please log in, or check the email entered.";
+			} else {
+				errorMessage = "Oops, something went wrong. Please try again after some time";
+			}
 		} else {
-			errorMessage = "Oops, something went wrong. Please try again after some time";
+			console.log(error);
+			errorMessage = "Oops, the server's not responding. Please try again after some time";
 		}
 
 		res.render("register", {page:"register", errorMessage});
