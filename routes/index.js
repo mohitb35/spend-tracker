@@ -19,7 +19,7 @@ router.get("/", isLoggedIn, (req, res) => {
 });
 
 router.get("/login", isLoggedIn, (req, res) => {
-	res.render("login", {page:"login"});
+	res.render("login", {page:"login", errorMessage:""});
 });
 
 router.post("/login", async (req,res) => {
@@ -47,14 +47,21 @@ router.post("/login", async (req,res) => {
 		res.redirect('/dashboard');
 
 	} catch (error) {
+		let errorMessage = "";
 		console.log("Error while logging in:", error.response.data, error.response.status, error.response.statusText);
-		res.render("login", {page:"login"});
+		
+		if (error.response.status === 401 || error.response.status === 400){
+			errorMessage = "Invalid credentials. Please check your email and password";
+		} else {
+			errorMessage = "Oops, something went wrong. Please try again after some time";
+		}
+		res.render("login", {page:"login", errorMessage});
 	}
 }); 
 
 
 router.get("/register", isLoggedIn, (req, res) => {
-	res.render("register", {page:"register"});
+	res.render("register", {page:"register", errorMessage:""});
 });
 
 router.post("/register", async (req, res) => {
@@ -83,8 +90,16 @@ router.post("/register", async (req, res) => {
 		res.redirect('/dashboard');
 
 	} catch (error) {
+		errorMessage = "";
 		console.log("Error while registering:", error.response.data, error.response.status, error.response.statusText);
-		res.render("register", {page:"register"});
+
+		if (error.response.status === 409 ){
+			errorMessage = "You seem to have already registered. Please log in, or check the email entered.";
+		} else {
+			errorMessage = "Oops, something went wrong. Please try again after some time";
+		}
+
+		res.render("register", {page:"register", errorMessage});
 	}
 });
 

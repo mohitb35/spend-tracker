@@ -1,7 +1,10 @@
 <% include partials/header.ejs %>
-
+		
 		<section class="page-content">
 			<div class="form-container">
+				<% if (errorMessage) { %>
+					<div class="api-error"><%= errorMessage %></div>
+				<% } %>
 				<h3>Login</h3>
 				<form id="login-form" action="/login" method="POST" novalidate>
 					<div class="form-field">

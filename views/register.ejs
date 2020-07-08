@@ -3,6 +3,9 @@
 	<section class="page-content">
 		<div class="offset"></div>
 		<div class="form-container">
+			<% if (errorMessage) { %>
+				<div class="api-error"><%= errorMessage %></div>
+			<% } %>
 			<%# Change Needed - Temporarily taking the user to dashboard without authentication %>
 			<h3>Register</h3>
 			<form id="reg-form" action="/register" method="post" novalidate>
