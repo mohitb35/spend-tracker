@@ -175,33 +175,34 @@ function validateAddEditSpendForm(event) {
 
 	// Check item name
 	let itemNameError = isTextInvalid(itemName.value, "item-name");
-	let itemNameFormElement = itemName.parentNode;
-	let itemNameErrorMessage = itemNameFormElement.lastElementChild;
+	let itemNameFormElement = itemName.parentNode.parentNode;
+	let itemNameErrorMessage = itemName.parentNode.lastElementChild;
 	handleError (event, itemNameError, itemNameFormElement, itemNameErrorMessage);
 
 	// Check date
 	let spendDateError = isDateInvalid(spendDate.value);
-	let spendDateFormElement = spendDate.parentNode;
-	let spendDateErrorMessage = spendDateFormElement.lastElementChild;
+	let spendDateFormElement = spendDate.parentNode.parentNode;
+	let spendDateErrorMessage = spendDate.parentNode.lastElementChild;
+	console.dir(spendDateErrorMessage);
 	handleError (event, spendDateError, spendDateFormElement, spendDateErrorMessage);
 
 	// Check amount
 	let amountError = isAmountInvalid(amount.value);
-	let amountFormElement = amount.parentNode;
-	let amountErrorMessage = amountFormElement.lastElementChild;
+	let amountFormElement = amount.parentNode.parentNode;
+	let amountErrorMessage = amount.parentNode.lastElementChild;
 	handleError (event, amountError, amountFormElement, amountErrorMessage);
 
 	// Check category
 	let categoryError = isValueSelected(categoryList.value, "category");
-	let categoryFormElement = categoryList.parentNode;
-	let categoryErrorMessage = categoryFormElement.lastElementChild;
+	let categoryFormElement = categoryList.parentNode.parentNode;
+	let categoryErrorMessage = categoryList.parentNode.lastElementChild;
 
 	handleError(event, categoryError, categoryFormElement, categoryErrorMessage);
 
 	// Check sub category
 	let subCategoryError = isValueSelected(subCategoryList.value, "sub-category");
-	let subCategoryFormElement = subCategoryList.parentNode;
-	let subCategoryErrorMessage = subCategoryFormElement.lastElementChild;
+	let subCategoryFormElement = subCategoryList.parentNode.parentNode;
+	let subCategoryErrorMessage = subCategoryList.parentNode.lastElementChild;
 
 	handleError(event, subCategoryError, subCategoryFormElement, subCategoryErrorMessage);
 
@@ -211,16 +212,16 @@ function validateAddEditSpendForm(event) {
 }
 
 function validateItemName(event) {
-	let formElement = event.target.parentNode;
-	let errorMessage = formElement.lastElementChild;
+	let formElement = event.target.parentNode.parentNode;
+	let errorMessage = event.target.parentNode.lastElementChild;
 	let error = isTextInvalid(event.target.value, "item-name");
 
 	handleError(event, error, formElement, errorMessage);
 }
 
 function validateSpendDate(event) {
-	let formElement = event.target.parentNode;
-	let errorMessage = formElement.lastElementChild;
+	let formElement = event.target.parentNode.parentNode;
+	let errorMessage = event.target.parentNode.lastElementChild;
 	let error = isDateInvalid(event.target.value);
 
 	handleError(event, error, formElement, errorMessage);
@@ -234,8 +235,8 @@ function isDateInvalid(spendDate) {
 }
 
 function validateAmount(event) {
-	let formElement = event.target.parentNode;
-	let errorMessage = formElement.lastElementChild;
+	let formElement = event.target.parentNode.parentNode;
+	let errorMessage = event.target.parentNode.lastElementChild;
 	let error = isAmountInvalid(event.target.value);
 
 	handleError(event, error, formElement, errorMessage);
@@ -254,16 +255,16 @@ function isAmountInvalid(amountText) {
 }
 
 function validateCategory(event) {
-	let formElement = event.target.parentNode;
-	let errorMessage = formElement.lastElementChild;
+	let formElement = event.target.parentNode.parentNode;
+	let errorMessage = event.target.parentNode.lastElementChild;
 	let error = isValueSelected(event.target.value, "category");
 
 	handleError(event, error, formElement, errorMessage);
 }
 
 function validateSubCategory(event) {
-	let formElement = event.target.parentNode;
-	let errorMessage = formElement.lastElementChild;
+	let formElement = event.target.parentNode.parentNode;
+	let errorMessage = event.target.parentNode.lastElementChild;
 	let error = isValueSelected(event.target.value, "sub-category");
 
 	handleError(event, error, formElement, errorMessage);

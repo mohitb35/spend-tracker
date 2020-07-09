@@ -260,3 +260,9 @@
 	padding: 1rem;
 	padding-bottom: 0;
 }
+
+#add-spend-form .error-message, #edit-spend-form .error-message {
+	background: none;
+	color: red;
+	padding: 0.3rem 0.3rem 0 0.3rem;
+}

@@ -106,7 +106,7 @@ a.button {
 	margin-top: 1.2rem;
 }
 
-.error input, .error.selector select {
+.error input, .error .selector select {
 	border: 1px solid rgba(255,0,0,0.5);
 }
 
