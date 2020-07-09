@@ -8,6 +8,7 @@ const axios = require('axios');
 // Add Spend Route
 router.post("/", async (req,res) => {
 	req.body.token = req.session.token;
+	req.body.userId = req.session.userId;
 
 	let body = JSON.stringify({
 		name: req.body['item-name'],
@@ -15,7 +16,8 @@ router.post("/", async (req,res) => {
 		categoryId: req.body['category'],
 		subCategoryId: req.body['sub-category'],
 		purchaseDate: req.body['date'],
-		token: req.body['token']
+		token: req.body['token'],
+		userId: req.body['userId']
 	});
 
 	try {
