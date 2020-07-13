@@ -19,7 +19,7 @@ router.get("/", isLoggedIn, (req, res) => {
 });
 
 router.get("/login", isLoggedIn, (req, res) => {
-	res.render("login", {page:"login", errorMessage:""});
+	res.render("login", {page:"login", errorMessage:"", email:""});
 });
 
 router.post("/login", async (req,res) => {
@@ -61,7 +61,7 @@ router.post("/login", async (req,res) => {
 			errorMessage = "Oops, the server's not responding. Please try again after some time";
 		}
 		
-		res.render("login", {page:"login", errorMessage});
+		res.render("login", {page:"login", errorMessage, email:req.body.email});
 	}
 }); 
 
