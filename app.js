@@ -154,7 +154,7 @@ app.get("/dashboard", loginRequired, async (req, res) => {
 				let lastMonth = monthBounds(monthRange[monthRange.length-1].date);
 				fromDate = lastMonth.firstDay;
 				toDate = lastMonth.lastDay;
-				console.log(fromDate, toDate);
+				// console.log(fromDate, toDate);
 			}
 		}
 	} 
@@ -173,7 +173,7 @@ app.get("/dashboard", loginRequired, async (req, res) => {
 			}
 		});
 		spends = spendResponse.data;
-		console.log(spends);
+		// console.log(spends);
 	} 
 	catch(error) {
 		console.log("Error fetching spends:", error.response.data, error.response.status, error.response.statusText);
