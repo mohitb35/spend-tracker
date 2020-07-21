@@ -94,4 +94,20 @@ router.put('/:id', async(req, res) => {
 
 }); */
 
+// Get Chart Data Route
+router.get("/summary/:categoryId", async (req, res) => {
+	let minDate = req.query.from;
+	let maxDate  = req.query.to;
+	let categoryId = req.params.categoryId;
+	let token = req.session.token;
+
+	let response = await axios.get(`${config.serverUrl}/spend/${token}/summary/${categoryId}`, {
+		params: {
+			minDate,
+			maxDate
+		}
+	});
+	res.status(200).json(response.data);
+});
+
 module.exports = router;
