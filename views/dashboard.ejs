@@ -57,7 +57,10 @@
 				</section>
 				<section class="stats-container">
 					<div class="stats-selector">
-						<select name="" id="">
+						<select name="chart-category" id="chart-category">
+							<% if (categories.length) { %>
+								<option value="0">all</option>
+							<% } %>
 							<% categories.forEach(category => { %>
 								<option value="<%= category.id %>"><%= category.name %></option>
 							<% }); %>
