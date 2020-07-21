@@ -8,7 +8,6 @@
 	<link rel="stylesheet" href="/stylesheets/header-footer.css">
 	<link rel="stylesheet" href="/stylesheets/login-register.css">
 	<link rel="stylesheet" href="/stylesheets/dashboard.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
 	<title>Spend Tracker</title>
 </head>
 <body>
@@ -20,8 +19,8 @@
 				</div>
 				<% 	if (page === "dashboard") { %>
 					<div class="nav-elements-right">
-						<div class="date-selector" id="spend-month-selector">
-							<select name="" id="">
+						<div class="date-selector">
+							<select name="month-filter" id="spend-month-selector">
 								<% if(typeof monthRange === "string"){ %>
 									<option value=""><%= monthRange %></option>
 								<% } else if (Array.isArray(monthRange)) {
