@@ -7,6 +7,11 @@ let pieChart = new Chart(ctx, {
 	data: {
 		"labels":[],
 		"datasets":[]
+	},
+	options: {
+		title: {
+
+		}
 	}
 });
 
@@ -37,10 +42,11 @@ function removeData(chart) {
 function addData(chart, labels, title, data, backgroundColor) {
     chart.data.labels = labels;
 	chart.data.datasets.push({
-		label: title,
 		data: data,
 		backgroundColor: backgroundColor
-	})
+	});
+	chart.options.title.text = title;
+	chart.options.title.display = true;
     chart.update();
 }
 
