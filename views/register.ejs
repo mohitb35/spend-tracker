@@ -1,37 +1,53 @@
 <% include partials/header.ejs %>
 
-	<section class="page-content">
-		<div class="offset"></div>
-		<div class="form-container">
-			<% if (errorMessage) { %>
-				<div class="api-error"><%= errorMessage %></div>
-			<% } %>
-			<%# Change Needed - Temporarily taking the user to dashboard without authentication %>
-			<h3>Register</h3>
-			<form id="reg-form" action="/register" method="post" novalidate>
-				<div class="form-field">
-					<label for="name">Name</label>
-					<input type="text" name="name" id="name" placeholder="Enter your name" required>
-					<span class="error-message hidden"></span>
-				</div>
-				<div class="form-field">
-					<label for="email">Email</label>
-					<input type="email" name="email" id="email" placeholder="Enter your email ID" required>
-					<span class="error-message hidden"></span>
-				</div>
-				<div class="form-field">
-					<label for="password">Password</label>
-					<input type="password" name="password" id="password" placeholder="Enter your password" required>
-					<span class="error-message hidden"></span>
-				</div>
-				<button type="submit" class="button form-button">Register</button>
-			</form>
-			<div class="reg-info">
-				<p>Already have an account?</p>
-				<a href="/" class="button"><span>Login</span></a>
+<section class="page-content">
+	<div class="form-container">
+		<% if (errorMessage) { %>
+		<div class="api-error"><%= errorMessage %></div>
+		<% } %> <%# Change Needed - Temporarily taking the user to dashboard without
+		authentication %>
+		<h3>Register</h3>
+		<form id="reg-form" action="/register" method="post" novalidate>
+			<div class="form-field">
+				<label for="name">Name</label>
+				<input
+					type="text"
+					name="name"
+					id="name"
+					placeholder="Enter your name"
+					required
+				/>
+				<span class="error-message hidden"></span>
 			</div>
+			<div class="form-field">
+				<label for="email">Email</label>
+				<input
+					type="email"
+					name="email"
+					id="email"
+					placeholder="Enter your email ID"
+					required
+				/>
+				<span class="error-message hidden"></span>
+			</div>
+			<div class="form-field">
+				<label for="password">Password</label>
+				<input
+					type="password"
+					name="password"
+					id="password"
+					placeholder="Enter your password"
+					required
+				/>
+				<span class="error-message hidden"></span>
+			</div>
+			<button type="submit" class="button form-button">Register</button>
+		</form>
+		<div class="reg-info">
+			<p>Already have an account?</p>
+			<a href="/" class="button"><span>Login</span></a>
 		</div>
-	</section>
-
+	</div>
+</section>
 
 <% include partials/footer.ejs %>
