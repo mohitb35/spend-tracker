@@ -25,7 +25,7 @@
 									<option value=""><%= monthRange %></option>
 								<% } else if (Array.isArray(monthRange)) {
 									monthRange.forEach(month => { %>
-										<option value="<%= month.date%>" <%= month.selected ? "selected" : "" %>><%= month.text %></option>
+										<option value="<%= month.text%>" <%= month.selected ? "selected" : "" %>><%= month.text %></option>
 								<% });
 								} else { %>
 									<option value="">Something went wrong</option>
