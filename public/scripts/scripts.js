@@ -31,7 +31,11 @@ let deleteConfirmButton = document.getElementById("delete-modal-confirm");
 let editItemButtons = document.querySelectorAll(".edit-box a");
 let editCloseButton = document.getElementById("edit-modal-close");
 
-
+/**
+ * Validates the register form and shows errors as applicable
+ * @param {Event} event - form submit event
+ * @listens SubmitEvent
+ */
 function validateRegister(event) {
 	// Check name
 	let nameError = isTextInvalid(name.value, "name");
@@ -56,6 +60,11 @@ function validateRegister(event) {
 	} 
 };
 
+/**
+ * Validates the login form and shows errors as applicable
+ * @param {Event} event - form submit event
+ * @listens SubmitEvent
+ */
 function validateLogin(event) {
 	// Check email
 	let emailError = isEmailInvalid(email.value);
@@ -74,6 +83,11 @@ function validateLogin(event) {
 	} 
 };
 
+/**
+ * Validates the name field and shows errors as applicable
+ * @param {Event} event - form submit event
+ * @listens SubmitEvent
+ */
 function validateName(event) {
 	let formElement = event.target.parentNode;
 	let errorMessage = formElement.lastElementChild;
@@ -82,6 +96,11 @@ function validateName(event) {
 	handleError(event, error, formElement, errorMessage);
 };
 
+/**
+ * Validates the email field and shows error as applicable
+ * @param {Event} event - form submit event
+ * @listens SubmitEvent
+ */
 function validateEmail(event) {
 	let formElement = event.target.parentNode;
 	let errorMessage = formElement.lastElementChild;
@@ -90,6 +109,11 @@ function validateEmail(event) {
 	handleError(event, error, formElement, errorMessage);
 };
 
+/**
+ * Validates the password field and shows error as applicable
+ * @param {Event} event - form submit event
+ * @listens SubmitEvent
+ */
 function validatePassword(event) {
 	let formElement = event.target.parentNode;
 	let errorMessage = formElement.lastElementChild;
@@ -104,68 +128,12 @@ function validatePassword(event) {
 	
 };
 
-
-function isTextInvalid(nameText, type) {
-	if (nameText === "") {
-		if (type == "name"){
-			return "Please enter your name";
-		}
-		 if (type == "item-name") {
-			return "Please enter the item name";
-		 }
-	}
-
-	return false;
-}
-
-function isEmailInvalid(emailText) {
-	let reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/
-
-	if (emailText === "") {
-		return "Please enter your email address";
-	}
-
-	if (!reg.test(emailText)){
-		return "Hmmm..the email address entered seems invalid";
-	}
-
-	return false;
-}
-
-function isPasswordInvalid(passwordText, isLogin){
-	if (passwordText === "") {
-		return "Please enter your password";
-	}
-
-	if(!isLogin) {
-		if (passwordText.length<8){
-			return "Password should be at least 8 characters";
-		}
-	
-		if (!(/\d/.test(passwordText) && /[a-zA-Z]/.test(passwordText))){
-			return "Password should contain both letters and numbers";
-		}
-	}
-	
-	return false;
-}
-
-function handleError(event, error, formElement, errorMessage) {
-	if (!error){
-		formElement.classList.remove("error");
-		errorMessage.innerText = "";
-		errorMessage.classList.add("hidden");
-	} else {
-		formElement.classList.add("error");
-		// Show new error message only if the focus is changed, or updated error message if there already was one showing
-		if(event.type !== "keyup" || errorMessage.innerText !== "") {
-			errorMessage.classList.remove("hidden");
-			errorMessage.innerText = error;
-		}
-	}
-}
-
-function validateAddEditSpendForm(event) {
+/**
+ * Validates the add/edit spend form and shows errors as applicable
+ * @param {Event} event - form submit event
+ * @listens SubmitEvent
+ */
+ function validateAddEditSpendForm(event) {
 	let formSubmitted = event.currentTarget;
 	let itemName = formSubmitted.querySelector("input[name='item-name']");
 	let spendDate = formSubmitted.querySelector("input[name='date']");
@@ -211,6 +179,11 @@ function validateAddEditSpendForm(event) {
 	} 
 }
 
+/**
+ * Validates the item name field for a spend and shows error as applicable
+ * @param {Event} event - form submit event
+ * @listens SubmitEvent
+ */
 function validateItemName(event) {
 	let formElement = event.target.parentNode.parentNode;
 	let errorMessage = event.target.parentNode.lastElementChild;
@@ -219,6 +192,11 @@ function validateItemName(event) {
 	handleError(event, error, formElement, errorMessage);
 }
 
+/**
+ * Validates the spend date field and shows error as applicable
+ * @param {Event} event - form submit event
+ * @listens SubmitEvent
+ */
 function validateSpendDate(event) {
 	let formElement = event.target.parentNode.parentNode;
 	let errorMessage = event.target.parentNode.lastElementChild;
@@ -227,13 +205,11 @@ function validateSpendDate(event) {
 	handleError(event, error, formElement, errorMessage);
 }
 
-function isDateInvalid(spendDate) {
-	if (spendDate === "") {
-		return "Please enter the spend date";
-	}
-	return false;
-}
-
+/**
+ * Validates the amount field for a spend and shows error as applicable
+ * @param {Event} event - form submit event
+ * @listens SubmitEvent
+ */
 function validateAmount(event) {
 	let formElement = event.target.parentNode.parentNode;
 	let errorMessage = event.target.parentNode.lastElementChild;
@@ -242,6 +218,114 @@ function validateAmount(event) {
 	handleError(event, error, formElement, errorMessage);
 }
 
+/**
+ * Validates the category field for a spend and shows error as applicable
+ * @param {Event} event - form submit event
+ * @listens SubmitEvent
+ */
+function validateCategory(event) {
+	let formElement = event.target.parentNode.parentNode;
+	let errorMessage = event.target.parentNode.lastElementChild;
+	let error = isValueSelected(event.target.value, "category");
+
+	handleError(event, error, formElement, errorMessage);
+}
+
+/**
+ * Validates the sub category field for a spend and shows error as applicable
+ * @param {Event} event - form submit event
+ * @listens SubmitEvent
+ */
+function validateSubCategory(event) {
+	let formElement = event.target.parentNode.parentNode;
+	let errorMessage = event.target.parentNode.lastElementChild;
+	let error = isValueSelected(event.target.value, "sub-category");
+
+	handleError(event, error, formElement, errorMessage);
+}
+
+// Helper functions to check if a field is valid/invalid
+
+/**  
+ * Checks if text is invalid. Returns: false (if valid), error message (if invalid)
+ * @param {string} nameText String value of name
+*/
+function isTextInvalid(text, type) {
+	if (text === "") {
+		if (type == "name"){
+			return "Please enter your name";
+		}
+		 if (type == "item-name") {
+			return "Please enter the item name";
+		 }
+	}
+
+	return false;
+}
+
+/**  
+ * Checks if email input is invalid. Returns: false (if valid), error message (if invalid)
+ * @param {string} emailText String value of email
+*/
+function isEmailInvalid(emailText) {
+	let reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/
+
+	if (emailText === "") {
+		return "Please enter your email address";
+	}
+
+	if (!reg.test(emailText)){
+		return "Hmmm..the email address entered seems invalid";
+	}
+
+	return false;
+}
+
+/** 
+	* Checks if password provided is invalid (empty or not conforming to rules)
+	* Returns: false (if valid), error message (if invalid)
+	* @param {string} passwordText String value of password
+	* @param {Object} [options] - password validation options
+	* @param {boolean} [options.checkFormat = true] Boolean indicating if password format should be checked. Default = true.
+	* @param {string} [options.fieldName = "password"] String value of field name. Default = "password".
+*/
+function isPasswordInvalid(passwordText, isLogin){
+	if (passwordText === "") {
+		return "Please enter your password";
+	}
+
+	if(!isLogin) {
+		if (passwordText.length<8){
+			return "Password should be at least 8 characters";
+		}
+	
+		if (!(/\d/.test(passwordText) && /[a-zA-Z]/.test(passwordText))){
+			return "Password should contain both letters and numbers";
+		}
+	}
+	
+	return false;
+}
+
+/** 
+	* Checks if date provided is invalid 
+	* Returns: false (if valid), error message (if invalid)
+	* @param {string} spendDate String value of spend date
+*/
+function isDateInvalid(spendDate) {
+	if (spendDate === "") {
+		return "Please enter the spend date";
+	}
+	return false;
+}
+
+
+/**
+ * Checks if amount provided is invalid 
+ * Returns: false (if valid), error message (if invalid)
+ * @param {string} amountText 
+ * @returns 
+ */
 function isAmountInvalid(amountText) {
 	if(amountText === ""){
 		return "Please enter an amount";
@@ -254,22 +338,12 @@ function isAmountInvalid(amountText) {
 	return false;
 }
 
-function validateCategory(event) {
-	let formElement = event.target.parentNode.parentNode;
-	let errorMessage = event.target.parentNode.lastElementChild;
-	let error = isValueSelected(event.target.value, "category");
-
-	handleError(event, error, formElement, errorMessage);
-}
-
-function validateSubCategory(event) {
-	let formElement = event.target.parentNode.parentNode;
-	let errorMessage = event.target.parentNode.lastElementChild;
-	let error = isValueSelected(event.target.value, "sub-category");
-
-	handleError(event, error, formElement, errorMessage);
-}
-
+/**
+ * Checks if a value is selected
+ * Returns: false (if selected), error message (if not selected)
+ * @param {string} amountText 
+ * @returns 
+ */
 function isValueSelected(value, type) {
 	if(value === "") {
 		if (type === "category") {
@@ -281,6 +355,27 @@ function isValueSelected(value, type) {
 		}
 
 		return false;
+	}
+}
+/**
+ * Handles display of the feedback element for an input
+ * @param {Event} triggering event 
+ * @param {(string|boolean)} error 
+ * @param {HTMLElement} formElement 
+ * @param {HTMLElement} errorMessage 
+ */
+function handleError(event, error, formElement, errorMessage) {
+	if (!error){
+		formElement.classList.remove("error");
+		errorMessage.innerText = "";
+		errorMessage.classList.add("hidden");
+	} else {
+		formElement.classList.add("error");
+		// Show new error message only if the focus is changed, or updated error message if there already was one showing
+		if(event.type !== "keyup" || errorMessage.innerText !== "") {
+			errorMessage.classList.remove("hidden");
+			errorMessage.innerText = error;
+		}
 	}
 }
 
@@ -354,6 +449,10 @@ if(spendList !== null) {
 
 }
 
+/**
+ * Updates sub categories when category is changed in add/edit spend forms
+ * @param {Event} event 
+ */
 function updateSubcategoryList(event) {
 	let categoryId = event.target.value;
 	let parentForm = event.target.form;
@@ -362,6 +461,12 @@ function updateSubcategoryList(event) {
 	populateSubcategoryList(categoryId, targetSubCategoryList);
 }
 
+/**
+ * Helper function to populate subcategory list by calling API based on category
+ * @param {*} categoryId 
+ * @param {*} targetSubCategoryList 
+ * @param {*} selectedSubcategoryId 
+ */
 function populateSubcategoryList(categoryId, targetSubCategoryList, selectedSubcategoryId = null){
 	fetch(serverUrl + "/spend/categories/" + categoryId)
 	.then(response => response.json())
@@ -393,18 +498,26 @@ function populateSubcategoryList(categoryId, targetSubCategoryList, selectedSubc
 	});
 }
 
-
 // Add events for Month Selector (Spend List)
 if(monthSelector !== null) {
 	monthSelector.addEventListener('change', filterSpendsByMonth);
 }
 
+/**
+ * Updates the dashboard when the month filter value is changed
+ * @param {Event} event 
+ */
 async function filterSpendsByMonth(event) {
 	let {firstDay, lastDay} = monthBounds(event.target.value);
 	let URL = `/dashboard?from=${firstDay}&to=${lastDay}`;
 	window.location = URL;
 }
 
+/**
+ * Returns first and last date of a month based on an input filterDate
+ * @param {string} filterDate 
+ * @returns {Object} month object with first and last day
+ */
 function monthBounds(filterDate) {
 	let date = new Date(filterDate);
 	let firstDay = new Date(date.getFullYear(), date.getMonth(), 1); 
@@ -415,11 +528,20 @@ function monthBounds(filterDate) {
 	}
 }
 
+/**
+ * Formats date into a string to be used in API call
+ * @param {Date} date 
+ * @returns {string} formatted date
+ */
 function toDateString(date) {
 	return date.getFullYear().toString() + '-' + (date.getMonth() + 1).toString().padStart(2, 0) +
     '-' + date.getDate().toString().padStart(2, 0);
 }
 
+/**
+ * Function to open or close modal
+ * @param {Event} event 
+ */
 function toggleModal(event) {
 	let element = event.currentTarget;
 	let data = element.dataset;
@@ -442,6 +564,11 @@ function toggleModal(event) {
 	targetModal.classList.toggle('displayed');
 }
 
+/**
+ * Function to populate contents of the Edit Form when the Edit Modal is opened
+ * @param {HTMLElement} editModal 
+ * @param {Object} data - spend data 
+ */
 function updateEditForm(editModal, data) {
 	let form = editModal.querySelector('form');
 	form.action = '/spend/' + editModal.dataset.spendId + '?_method=PUT';
@@ -459,6 +586,10 @@ function updateEditForm(editModal, data) {
 	populateSubcategoryList(data.spendCategoryId, subCategorySelect, data.spendSubCategoryId);
 }
 
+/**
+ * Clears contents of the Edit Form when the Edit Modal is closed
+ * @param {HTMLElement} editModal 
+ */
 function clearEditForm(editModal) {
 	let form = editModal.querySelector('form');
 	form.action = ''; 
@@ -467,6 +598,10 @@ function clearEditForm(editModal) {
 	form.reset();
 }
 
+/**
+ * Calls API to confirm deletion and reloads the dashboard
+ * @param {Event} event 
+ */
 async function confirmDelete(event) {
 	let element =  event.currentTarget;
 	let target = document.getElementById(element.dataset.target);
