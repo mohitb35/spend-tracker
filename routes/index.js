@@ -5,13 +5,7 @@ const router = express.Router();
 
 const axios = require('axios');
 
-function isLoggedIn(req, res, next) {
-	if (req.session.token) {
-		return res.redirect("/dashboard");
-	}
-
-	next();
-}
+const { isLoggedIn } = require('../utils/middleware');
 
 // Landing Page/Login
 router.get("/", isLoggedIn, (req, res) => {
