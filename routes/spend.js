@@ -82,7 +82,7 @@ router.put('/:id', async(req, res) => {
 			} 
 		);
 
-		res.redirect('/dashboard');
+		res.redirect(req.headers.referer);
 	}
 	catch(error) {
 		console.log("Error while editing spend:", error.response.data, error.response.status, error.response.statusText);
