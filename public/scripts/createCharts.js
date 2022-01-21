@@ -11,7 +11,9 @@ let pieChart = new Chart(ctx, {
 	options: {
 		title: {
 
-		}
+		},
+		responsive: true,
+		aspectRatio	: 1.5
 	}
 });
 
@@ -28,6 +30,10 @@ async function renderChart(categoryId) {
 	console.log("Rendering chart for category id:",categoryId);
 	removeData(pieChart);
 	let { title, labels, data, backgroundColor } = await getChartData(categoryId, firstDay, lastDay);
+	// console.log(title);
+	// console.log(labels);
+	// console.log(data);
+	// console.log(backgroundColor);
 	addData(pieChart, labels, title, data, backgroundColor);
 	
 }

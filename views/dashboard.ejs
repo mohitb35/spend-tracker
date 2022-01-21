@@ -1,77 +1,92 @@
 <% include partials/header.ejs %>
 
-		<section class="page-content">
-			<div class="offset"></div>
-			<div class="grid-container">
-				<% include partials/spendList.ejs %>
-				<section class="add-item-container">
-					<div class="form-header">
-						<h3>Add Spend</h3>
-						<button form="add-spend-form" type="submit" class="button small">Save</button>
+<section class="page-content">
+	<div class="grid-container">
+		<% include partials/spendList.ejs %>
+		<section class="add-item-container">
+			<div class="form-header">
+				<h3>Add Spend</h3>
+				<button form="add-spend-form" type="submit" class="button small">
+					Save
+				</button>
+			</div>
+			<form id="add-spend-form" action="/spend" method="POST" novalidate>
+				<div class="form-field inline">
+					<label for="add-item-name">Name *</label>
+					<div>
+						<input
+							type="text"
+							name="item-name"
+							id="add-item-name"
+							placeholder="What did you buy?"
+						/>
+						<span class="error-message hidden">Test</span>
 					</div>
-					<form id="add-spend-form" action="/spend" method="POST" novalidate>
-						<div class="form-field inline">
-							<label for="add-item-name">Name *</label>
-							<div>
-								<input type="text" name="item-name" id="add-item-name" placeholder="What did you buy?">
-								<span class="error-message hidden">Test</span>
-							</div>
-						</div>
-						<div class="form-field inline">
-							<label for="add-item-date">Date *</label>
-							<div>
-								<input type="date" name="date" id="add-item-date" placeholder="Select a date" min="">
-								<span class="error-message hidden">Test</span>
-							</div>
-						</div>
-						<div class="form-field inline">
-							<label for="add-item-amount">Amount *</label>
-							<div>
-								<input type="number" name="amount" id="add-item-amount" placeholder="Enter amount">
-								<span class="error-message hidden">Test</span>
-							</div>
-						</div>
-						<div class="form-field inline">
-							<label for="add-item-category">Category *</label>
-							<div class="selector">
-								<select name="category" id="add-item-category">
-									<option value = "" selected disabled hidden> --- Select --- </option>
-									<% categories.forEach(category => { %>
-										<option value="<%= category.id %>"><%= category.name %></option>
-									<% }); %>
-								</select>
-								<span class="error-message hidden"></span>
-							</div>
-							
-						</div>
-						<div class="form-field inline">
-							<label for="add-item-sub-category">Sub-Category *</label>
-							<div class="selector">
-								<select name="sub-category" id="add-item-sub-category">
-									<option value = "" selected disabled hidden> --- Select --- </option>
-								</select>
-								<span class="error-message hidden"></span>
-							</div>
-						</div>
-					</form>
-				</section>
-				<section class="stats-container">
-					<div class="stats-selector">
-						<select name="chart-category" id="chart-category">
-							<% if (categories.length) { %>
-								<option value="0">all</option>
-							<% } %>
+				</div>
+				<div class="form-field inline">
+					<label for="add-item-date">Date *</label>
+					<div>
+						<input
+							type="date"
+							name="date"
+							id="add-item-date"
+							placeholder="Select a date"
+							min=""
+						/>
+						<span class="error-message hidden">Test</span>
+					</div>
+				</div>
+				<div class="form-field inline">
+					<label for="add-item-amount">Amount *</label>
+					<div>
+						<input
+							type="number"
+							name="amount"
+							id="add-item-amount"
+							placeholder="Enter amount"
+						/>
+						<span class="error-message hidden">Test</span>
+					</div>
+				</div>
+				<div class="form-field inline">
+					<label for="add-item-category">Category *</label>
+					<div class="selector">
+						<select name="category" id="add-item-category">
+							<option value="" selected disabled hidden>--- Select ---</option>
 							<% categories.forEach(category => { %>
-								<option value="<%= category.id %>"><%= category.name %></option>
+							<option value="<%= category.id %>"><%= category.name %></option>
 							<% }); %>
 						</select>
+						<span class="error-message hidden"></span>
 					</div>
-					<div class="chart-container" width="180" height="180">
-						<canvas id="piechart"></canvas>
+				</div>
+				<div class="form-field inline">
+					<label for="add-item-sub-category">Sub-Category *</label>
+					<div class="selector">
+						<select name="sub-category" id="add-item-sub-category">
+							<option value="" selected disabled hidden>--- Select ---</option>
+						</select>
+						<span class="error-message hidden"></span>
 					</div>
-				</section>
+				</div>
+			</form>
+		</section>
+		<section class="stats-container">
+			<div class="stats-selector">
+				<select name="chart-category" id="chart-category">
+					<% if (categories.length) { %>
+					<option value="0">all</option>
+					<% } %> <% categories.forEach(category => { %>
+					<option value="<%= category.id %>"><%= category.name %></option>
+					<% }); %>
+				</select>
+			</div>
+			<div class="chart-container">
+				<canvas id="piechart"></canvas>
 			</div>
 		</section>
+	</div>
+</section>
 
 <% include partials/deleteSpendModal.ejs %>
 <% include partials/editSpendModal.ejs %>

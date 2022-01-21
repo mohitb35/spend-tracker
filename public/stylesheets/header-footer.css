@@ -24,7 +24,7 @@ nav {
 		rgba(0, 143, 68, 1) 100%
 	);
 	position: fixed;
-	overflow: hidden;
+	overflow: auto;
 }
 
 .nav-container {
@@ -33,8 +33,9 @@ nav {
 	margin: 0 auto;
 	height: 100%;
 	display: flex;
-	align-items: center;
-	justify-content: space-between;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: space-around;
 }
 
 footer {
@@ -50,24 +51,26 @@ footer {
 }
 
 .branding {
-	font-size: 2rem;
+	font-size: 1.2rem;
 	color: #f7f7f7;
 }
 
 .nav-elements-right {
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
 }
 
 .nav-elements-right .profile ul {
 	display: flex;
+	align-items: center;
 	list-style-type: none;
 	padding: 0;
-	color: #160b0b;
+	color: #d7d7d7;
 }
 
 .nav-elements-right .profile ul li {
-	padding: 1rem;
+	padding: 0 1rem;
 }
 
 a,
@@ -96,9 +99,9 @@ a:hover {
 	margin-left: -25%;
 } */
 
-.date-selector {
+/* .date-selector {
 	margin: 1.5rem 2rem;
-}
+} */
 
 /* Attribution - Daniel David https://codepen.io/danield770/pen/bgJOyV?editors=1100 */
 select {
@@ -136,4 +139,24 @@ option:not(:checked) {
 
 h3 {
 	text-transform: uppercase;
+}
+
+@media screen and (min-width: 769px) {
+	.nav-container {
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.branding {
+		font-size: 2rem;
+	}
+
+	.date-selector {
+		margin: 1.5rem 2rem;
+	}
+
+	nav {
+		height: 80px;
+	}
 }
