@@ -1,6 +1,8 @@
 let ctx = document.getElementById('piechart');
 let chartCategorySelector = document.getElementById('chart-category');
-chartCategorySelector.addEventListener('change', updateChart);
+if (chartCategorySelector) {
+	chartCategorySelector.addEventListener('change', updateChart);
+}
 
 let pieChart = new Chart(ctx, {
 	type: 'pie',
@@ -18,7 +20,6 @@ let pieChart = new Chart(ctx, {
 });
 
 function loadInitialChart() {
-	console.log("Loading initial chart");
 	let categoryId = chartCategorySelector.value;
 	renderChart(categoryId);
 }
@@ -26,20 +27,15 @@ function loadInitialChart() {
 loadInitialChart();
 
 async function renderChart(categoryId) {
-	let { firstDay, lastDay} = monthBounds(monthSelector.value);
-	console.log("Rendering chart for category id:",categoryId);
-	removeData(pieChart);
-	let { title, labels, data, backgroundColor } = await getChartData(categoryId, firstDay, lastDay);
-	// console.log(title);
-	// console.log(labels);
-	// console.log(data);
-	// console.log(backgroundColor);
-	addData(pieChart, labels, title, data, backgroundColor);
-	
+	if (monthSelector.value) {
+		let { firstDay, lastDay} = monthBounds(monthSelector.value);
+		removeData(pieChart);
+		let { title, labels, data, backgroundColor } = await getChartData(categoryId, firstDay, lastDay);
+		addData(pieChart, labels, title, data, backgroundColor);
+	}
 }
 
 function removeData(chart) {
-	console.log("Clearing chart data");
     chart.data.labels = [];
     chart.data.datasets = [];
     chart.update();
@@ -88,7 +84,6 @@ async function getChartData(categoryId, firstDay, lastDay) {
 }
 
 function updateChart(event) {
-	console.log("In update chart");
 	let categoryId = event.target.value;
 	renderChart(categoryId);
 }
