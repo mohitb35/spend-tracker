@@ -1,11 +1,11 @@
-const config = require('../config'); //For local only
+// const config = require('../config'); //For local only
 
 const express = require('express');
 const router = express.Router();
 
 const axios = require('axios');
 
-const serverUrl = process.env.SERVER_URL || config.serverUrl;
+const serverUrl = process.env.SERVER_URL;
 
 // Add Spend Route
 router.post("/", async (req,res) => {

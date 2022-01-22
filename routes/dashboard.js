@@ -1,4 +1,4 @@
-const config = require('../config'); //For local only
+// const config = require('../config'); //For local only
 
 const express = require('express');
 const router = express.Router();
@@ -8,7 +8,7 @@ const axios = require('axios');
 const { loginRequired } = require('../utils/middleware');
 const { getMonths, monthBounds } = require('../utils/helpers');
 
-const serverUrl = process.env.SERVER_URL || config.serverUrl;
+const serverUrl = process.env.SERVER_URL;
 
 //Dashboard Page
 router.get("/", loginRequired, async (req, res) => {
