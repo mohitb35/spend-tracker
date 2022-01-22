@@ -1,4 +1,4 @@
-// const config = require('../config'); //For local only
+const config = require('../config'); //For local only
 
 const express = require('express');
 const router = express.Router();
@@ -8,8 +8,7 @@ const axios = require('axios');
 const { loginRequired } = require('../utils/middleware');
 const { getMonths, monthBounds } = require('../utils/helpers');
 
-const serverUrl = process.env.SERVER_URL;
-// const serverUrl = config.serverUrl; // for local only
+const serverUrl = process.env.SERVER_URL || config.serverUrl;
 
 //Dashboard Page
 router.get("/", loginRequired, async (req, res) => {
@@ -18,7 +17,7 @@ router.get("/", loginRequired, async (req, res) => {
 
 	let token = req.session.token;
 	let userName = req.session.userName;
-	let categories, monthRange, spends;
+	let categories, monthRange, spends, spendTotal;
 
 	// get list of categories
 	try {
@@ -62,7 +61,9 @@ router.get("/", loginRequired, async (req, res) => {
 			}
 		});
 		spends = spendResponse.data;
-		// console.log(spends);
+		spendTotal = spends.reduce((total, spend) => {
+			return total + Number(spend.amount)
+		}, 0)
 	} 
 	catch(error) {
 		spends = "An error occurred. Please log out and sign in again.";
@@ -74,7 +75,8 @@ router.get("/", loginRequired, async (req, res) => {
 		userName: userName, 
 		categories: categories, 
 		monthRange: monthRange, 
-		spends: spends, 
+		spends: spends,
+		spendTotal: spendTotal, 
 		fromDate: fromDate, 
 		page: "dashboard"});
 });

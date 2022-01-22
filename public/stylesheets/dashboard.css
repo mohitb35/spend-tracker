@@ -55,6 +55,15 @@
 	margin: 0;
 }
 
+.spend-total {
+	font-size: 1.2rem;
+	text-align: center;
+}
+
+.spend-total label {
+	font-weight: bold;
+}
+
 .spend-item {
 	/* width: 97%; */
 	height: 7rem;
