@@ -1,4 +1,4 @@
-const config = require('../config');
+// const config = require('../config'); //For local only
 
 const express = require('express');
 const router = express.Router();
@@ -7,6 +7,8 @@ const axios = require('axios');
 
 const { loginRequired } = require('../utils/middleware');
 const { getMonths, monthBounds } = require('../utils/helpers');
+
+const serverUrl = process.env.SERVER_URL;
 
 //Dashboard Page
 router.get("/", loginRequired, async (req, res) => {
@@ -19,7 +21,7 @@ router.get("/", loginRequired, async (req, res) => {
 
 	// get list of categories
 	try {
-		const categoryResponse = await axios.get(config.serverUrl + "/spend/categories");
+		const categoryResponse = await axios.get(`${serverUrl}/spend/categories`);
 		categories = categoryResponse.data;
 	} 
 	catch(error) {
@@ -28,7 +30,7 @@ router.get("/", loginRequired, async (req, res) => {
 
 	// Get list of dates for month selector
 	try {
-		const dateResponse = await axios.get(config.serverUrl + `/spend/${token}/daterange`);
+		const dateResponse = await axios.get(`${serverUrl}/spend/${token}/daterange`);
 		let returnedDates = dateResponse.data;
 		if(returnedDates === "No spends found"){
 			monthRange = "No spends found";
@@ -50,7 +52,7 @@ router.get("/", loginRequired, async (req, res) => {
 	
 	// Get list of spends
 	try {
-		const spendResponse = await axios.get(config.serverUrl + `/spend`, {
+		const spendResponse = await axios.get(`${serverUrl}/spend`, {
 			data: {
 				token: token,
 				minDate: fromDate,

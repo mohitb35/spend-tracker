@@ -1,4 +1,4 @@
-const config = require('./config');
+//const config = require('./config'); //For local only
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -21,10 +21,17 @@ app.use(bodyParser.urlencoded({
 
 app.use(methodOverride("_method"));
 
-app.use(sessions({
+// For local only
+/* app.use(sessions({
 	cookieName: config.cookieName,
 	secret: config.secret,
 	duration: config.duration
+})); */
+
+app.use(sessions({
+	cookieName: process.env.COOKIE_NAME,
+	secret: process.env.SECRET,
+	duration: process.env.DURATION
 }));
 
 /* app.use((req, res, next) => {

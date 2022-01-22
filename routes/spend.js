@@ -1,9 +1,11 @@
-const config = require('../config');
+// const config = require('../config'); //For local only
 
 const express = require('express');
 const router = express.Router();
 
 const axios = require('axios');
+
+const serverUrl = process.env.SERVER_URL;
 
 // Add Spend Route
 router.post("/", async (req,res) => {
@@ -22,7 +24,7 @@ router.post("/", async (req,res) => {
 
 	try {
 		const response = await axios.post(
-			config.serverUrl + "/spend",
+			`${serverUrl}/spend`,
 			body,
 			{
 				headers: {
@@ -42,7 +44,7 @@ router.post("/", async (req,res) => {
 router.delete('/:id', async(req, res) => {
 
 	try {
-		const response = await axios.delete(config.serverUrl + "/spend/" + req.params.id,{
+		const response = await axios.delete(`${serverUrl}/spend/${req.params.id}`,{
 			data: {
 				token: req.session.token
 			},
@@ -73,7 +75,7 @@ router.put('/:id', async(req, res) => {
 
 	try {
 		const response = await axios.put(
-			config.serverUrl + "/spend/" + req.params.id,
+			`${serverUrl}/spend/${req.params.id}`,
 			body,
 			{
 				headers: {
@@ -101,7 +103,7 @@ router.get("/summary/:categoryId", async (req, res) => {
 	let categoryId = req.params.categoryId;
 	let token = req.session.token;
 
-	let response = await axios.get(`${config.serverUrl}/spend/${token}/summary/${categoryId}`, {
+	let response = await axios.get(`${serverUrl}/spend/${token}/summary/${categoryId}`, {
 		params: {
 			minDate,
 			maxDate

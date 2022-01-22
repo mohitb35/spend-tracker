@@ -1,4 +1,4 @@
-const config = require('../config');
+// const config = require('../config'); //For local only
 
 const express = require('express');
 const router = express.Router();
@@ -6,6 +6,8 @@ const router = express.Router();
 const axios = require('axios');
 
 const { isLoggedIn } = require('../utils/middleware');
+
+const serverUrl = process.env.SERVER_URL;
 
 // Landing Page/Login
 router.get("/", isLoggedIn, (req, res) => {
@@ -24,7 +26,7 @@ router.post("/login", async (req,res) => {
 
 	try {
 		const response = await axios.post(
-			config.serverUrl + "/login", 
+			`${serverUrl}/login`, 
 			body,
 			{
 				headers: {
@@ -73,7 +75,7 @@ router.post("/register", async (req, res) => {
 
 	try {
 		const response = await axios.post(
-			config.serverUrl + "/register", 
+			`${serverUrl}/register`, 
 			body,
 			{
 				headers: {
@@ -113,7 +115,7 @@ router.get('/logout', (req,res) => {
 	let userId = req.session.userId;
 
 	try {
-		axios.get(config.serverUrl + `/logout`, {
+		axios.get(`${serverUrl}/logout`, {
 			data: {
 				userId: userId,
 				token: token

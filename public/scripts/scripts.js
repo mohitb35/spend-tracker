@@ -1,4 +1,4 @@
-const serverUrl = 'http://localhost:3000';
+const serverUrl = 'https://spend-tracker-35-api.herokuapp.com';
 
 let regForm = document.getElementById("reg-form");
 let loginForm = document.getElementById("login-form")
@@ -468,7 +468,7 @@ function updateSubcategoryList(event) {
  * @param {*} selectedSubcategoryId 
  */
 function populateSubcategoryList(categoryId, targetSubCategoryList, selectedSubcategoryId = null){
-	fetch(serverUrl + "/spend/categories/" + categoryId)
+	fetch(`${serverUrl}/spend/categories/${categoryId}`)
 	.then(response => response.json())
 	.then(subcategories => {
 		// Remove previous subcategories
