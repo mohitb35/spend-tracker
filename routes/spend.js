@@ -6,6 +6,7 @@ const router = express.Router();
 const axios = require('axios');
 
 const serverUrl = process.env.SERVER_URL;
+// const serverUrl = config.serverUrl; //for local only
 
 // Add Spend Route
 router.post("/", async (req,res) => {

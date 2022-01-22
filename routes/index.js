@@ -7,7 +7,8 @@ const axios = require('axios');
 
 const { isLoggedIn } = require('../utils/middleware');
 
-const serverUrl = process.env.SERVER_URL;
+const serverUrl = process.env.SERVER_URL; 
+// const serverUrl = config.serverUrl; //for local only
 
 // Landing Page/Login
 router.get("/", isLoggedIn, (req, res) => {

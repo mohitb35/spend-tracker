@@ -9,6 +9,7 @@ const { loginRequired } = require('../utils/middleware');
 const { getMonths, monthBounds } = require('../utils/helpers');
 
 const serverUrl = process.env.SERVER_URL;
+// const serverUrl = config.serverUrl; // for local only
 
 //Dashboard Page
 router.get("/", loginRequired, async (req, res) => {
@@ -25,6 +26,7 @@ router.get("/", loginRequired, async (req, res) => {
 		categories = categoryResponse.data;
 	} 
 	catch(error) {
+		console.log(error);
 		console.log("Error fetching categories:", error.response.data, error.response.status, error.response.statusText);
 	}
 
