@@ -27,6 +27,8 @@ app.use(methodOverride("_method"));
 	duration: config.duration
 })); */
 
+console.log("Process variables:", process.env);
+
 app.use(sessions({
 	cookieName: process.env.COOKIE_NAME,
 	secret: process.env.SECRET,
