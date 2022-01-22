@@ -32,7 +32,7 @@ console.log("Process variables:", process.env);
 app.use(sessions({
 	cookieName: process.env.COOKIE_NAME,
 	secret: process.env.SECRET,
-	duration: process.env.DURATION
+	duration: 120 * 60 * 1000
 }));
 
 // Including Routes
