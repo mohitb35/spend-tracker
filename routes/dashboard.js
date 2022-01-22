@@ -65,6 +65,7 @@ router.get("/", loginRequired, async (req, res) => {
 		// console.log(spends);
 	} 
 	catch(error) {
+		spends = "An error occurred. Please log out and sign in again.";
 		console.log("Error fetching spends:", error.response.data, error.response.status, error.response.statusText);
 	}
 
