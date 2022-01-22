@@ -6,6 +6,7 @@ const loginRequired = function (req, res, next) {
 }
 
 const isLoggedIn = function (req, res, next) {
+	console.log(req);
 	if (req.session.token) {
 		return res.redirect("/dashboard");
 	}
