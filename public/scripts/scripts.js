@@ -1,3 +1,5 @@
+// const { default: axios } = require("axios");
+
 const serverUrl = 'https://spend-tracker-35-api.herokuapp.com';
 
 let regForm = document.getElementById("reg-form");
@@ -467,10 +469,12 @@ function updateSubcategoryList(event) {
  * @param {*} targetSubCategoryList 
  * @param {*} selectedSubcategoryId 
  */
-function populateSubcategoryList(categoryId, targetSubCategoryList, selectedSubcategoryId = null){
-	fetch(`${serverUrl}/spend/categories/${categoryId}`)
-	.then(response => response.json())
-	.then(subcategories => {
+async function populateSubcategoryList(categoryId, targetSubCategoryList, selectedSubcategoryId = null){
+	try {
+		const response = await axios.get(`${serverUrl}/spend/categories/${categoryId}`);
+
+		const subcategories = response.data;
+
 		// Remove previous subcategories
 		let currentOptionCount = targetSubCategoryList.options.length;
 
@@ -495,7 +499,10 @@ function populateSubcategoryList(categoryId, targetSubCategoryList, selectedSubc
 			targetSubCategoryList.options[0].innerText = subcategories;
 			targetSubCategoryList.options[0].selected = true;
 		}
-	});
+	} catch {
+		targetSubCategoryList.options[0].innerText = "Error. Try later.";
+		targetSubCategoryList.options[0].selected = true;
+	}
 }
 
 // Add events for Month Selector (Spend List)
@@ -606,10 +613,15 @@ async function confirmDelete(event) {
 	let element =  event.currentTarget;
 	let target = document.getElementById(element.dataset.target);
 	
-	const response = await axios.delete(`/spend/${target.dataset.spendId}`);
-	target.classList.toggle('displayed');
-
-	if(response.status == 200){
-		location.reload();
+	try {
+		const response = await axios.delete(`/spend/${target.dataset.spendId}`);
+		target.classList.toggle('displayed');
+	
+		if(response.status == 200){
+			location.reload();
+		} 
+	} catch {
+		target.getElementsByClassName('api-error')[0].innerText = "An error occured. Try again later";
 	}
+	
 }
